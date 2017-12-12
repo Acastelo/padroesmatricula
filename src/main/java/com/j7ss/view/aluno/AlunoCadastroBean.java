@@ -1,11 +1,3 @@
-/*
- * @version     1.0.0
- * @author      Edivando J. Alves
- * @contact     edivando@j7ss.com ( http://www.j7ss.com )
- * 
- * @copyright  	Copyright 2010 - 2016 J7 Smart Solutions, all rights reserved.
- * 
- */
 package com.j7ss.view.aluno;
 
 import java.io.Serializable;
@@ -14,9 +6,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-
-import lombok.Getter;
-import lombok.Setter;
 
 import com.j7ss.core.MD5;
 import com.j7ss.core.Messages;
@@ -31,27 +20,45 @@ import com.j7ss.entity.Instituicao;
 import com.j7ss.entity.constraint.Page;
 import com.j7ss.entity.constraint.UsuarioType;
 
-/**
- * 
- * @author Edivando Alves
- * @date  10/02/2016
- * 
- */
 @ManagedBean
 @ViewScoped
 public class AlunoCadastroBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	@Setter
 	private Aluno aluno;
 	
-	@Getter @Setter
 	private Instituicao instituicao = new Instituicao();
-	@Getter @Setter
 	private Campus campus = new Campus();
-	@Getter @Setter
 	private Departamento departamento = new Departamento();
 	
+	public Instituicao getInstituicao() {
+		return instituicao;
+	}
+
+	public void setInstituicao(Instituicao instituicao) {
+		this.instituicao = instituicao;
+	}
+
+	public Campus getCampus() {
+		return campus;
+	}
+
+	public void setCampus(Campus campus) {
+		this.campus = campus;
+	}
+
+	public Departamento getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(Departamento departamento) {
+		this.departamento = departamento;
+	}
+
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
+	}
+
 	@PostConstruct
 	public void init(){
 		List<Instituicao> list = Instituicao.findAll();

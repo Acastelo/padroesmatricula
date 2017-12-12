@@ -1,11 +1,3 @@
-/*
- * @version     1.0.0
- * @author      Edivando J. Alves
- * @contact     edivando@j7ss.com ( http://www.j7ss.com )
- * 
- * @copyright  	Copyright 2010 - 2016 J7 Smart Solutions, all rights reserved.
- * 
- */
 package com.j7ss.view.instituicao;
 
 import java.util.Date;
@@ -14,8 +6,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-
-import lombok.Setter;
 
 import com.j7ss.core.BasicView;
 import com.j7ss.core.DAOException;
@@ -28,23 +18,15 @@ import com.j7ss.entity.constraint.DocumentoParse;
 import com.j7ss.entity.constraint.DocumentoStatus;
 import com.j7ss.view.LoginBean;
 
-/**
- * 
- * @author Edivando Alves
- * @date  10/02/2016
- * 
- */
 @ManagedBean
 @ViewScoped
 public class InstituicaoDocumentoBean extends BasicView<DocumentoVagaEstagio> {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Setter
 	@ManagedProperty(value="#{loginBean}")
 	private LoginBean loginBean;
 	
-	@Setter
 	private DocumentoVagaEstagioMessage docMessage;
 	
 	public void saveErro(){
@@ -106,4 +88,13 @@ public class InstituicaoDocumentoBean extends BasicView<DocumentoVagaEstagio> {
 	public List<DocumentoVagaEstagio> getEntitys() {
 		return entitys == null ? entitys = DocumentoVagaEstagio.findByDocumentoStatus(DocumentoStatus.AGUARDANDO_VERIFICACAO) : entitys;
 	}
+
+	public void setLoginBean(LoginBean loginBean) {
+		this.loginBean = loginBean;
+	}
+
+	public void setDocMessage(DocumentoVagaEstagioMessage docMessage) {
+		this.docMessage = docMessage;
+	}
+	
 }

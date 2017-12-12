@@ -17,24 +17,15 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
-import lombok.Setter;
-
 import com.j7ss.entity.Campus;
 import com.j7ss.view.aluno.AlunoCadastroBean;
 
-/**
- * 
- * @author Edivando Alves
- * @date  10/02/2016
- * 
- */
 @ManagedBean
 @ViewScoped
 public class CampusConverter implements Converter, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@Setter
 	@ManagedProperty(value="#{alunoCadastroBean}")
 	private AlunoCadastroBean alunoCadastroBean;
 	
@@ -47,5 +38,15 @@ public class CampusConverter implements Converter, Serializable {
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		return (value != null) ? ((Campus) value).getNome() : null;
 	}
+
+	public AlunoCadastroBean getAlunoCadastroBean() {
+		return alunoCadastroBean;
+	}
+
+	public void setAlunoCadastroBean(AlunoCadastroBean alunoCadastroBean) {
+		this.alunoCadastroBean = alunoCadastroBean;
+	}
+	
+	
 
 }

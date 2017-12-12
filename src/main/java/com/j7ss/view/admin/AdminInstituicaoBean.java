@@ -1,11 +1,3 @@
-/*
- * @version     1.0.0
- * @author      Edivando J. Alves
- * @contact     edivando@j7ss.com ( http://www.j7ss.com )
- * 
- * @copyright  	Copyright 2010 - 2016 J7 Smart Solutions, all rights reserved.
- * 
- */
 package com.j7ss.view.admin;
 
 import java.util.ArrayList;
@@ -16,9 +8,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-
-import lombok.Getter;
-import lombok.Setter;
 
 import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.event.TransferEvent;
@@ -35,39 +24,81 @@ import com.j7ss.entity.Departamento;
 import com.j7ss.entity.Documento;
 import com.j7ss.entity.Instituicao;
 
-/**
- * 
- * @author Edivando Alves
- * @date  10/02/2016
- * 
- */
 @ManagedBean
 @ViewScoped
 public class AdminInstituicaoBean extends BasicView<Instituicao>{
 	private static final long serialVersionUID = 1L;
 	
-	@Getter
 	private TreeNode root;
-	@Getter @Setter
 	private TreeNode selectedNode;
 
-	@Setter
 	private Campus campus;
-	@Setter
 	private Departamento departamento;
 	private Curso curso;
 	
-	@Getter 
 	private boolean showCampus;
-	@Getter 
 	private boolean showDepartamento;
-	@Getter 
 	private boolean showCurso;
 	
 	private List<Documento> documentos;
-	@Getter @Setter
 	private DualListModel<Documento> pickListDocumentos;
 	
+	public TreeNode getRoot() {
+		return root;
+	}
+
+	public void setRoot(TreeNode root) {
+		this.root = root;
+	}
+
+	public TreeNode getSelectedNode() {
+		return selectedNode;
+	}
+
+	public void setSelectedNode(TreeNode selectedNode) {
+		this.selectedNode = selectedNode;
+	}
+
+	public boolean isShowCampus() {
+		return showCampus;
+	}
+
+	public void setShowCampus(boolean showCampus) {
+		this.showCampus = showCampus;
+	}
+
+	public boolean isShowDepartamento() {
+		return showDepartamento;
+	}
+
+	public void setShowDepartamento(boolean showDepartamento) {
+		this.showDepartamento = showDepartamento;
+	}
+
+	public boolean isShowCurso() {
+		return showCurso;
+	}
+
+	public void setShowCurso(boolean showCurso) {
+		this.showCurso = showCurso;
+	}
+
+	public DualListModel<Documento> getPickListDocumentos() {
+		return pickListDocumentos;
+	}
+
+	public void setPickListDocumentos(DualListModel<Documento> pickListDocumentos) {
+		this.pickListDocumentos = pickListDocumentos;
+	}
+
+	public void setDepartamento(Departamento departamento) {
+		this.departamento = departamento;
+	}
+
+	public void setDocumentos(List<Documento> documentos) {
+		this.documentos = documentos;
+	}
+
 	@PostConstruct
 	public void initPickListDocumentos(){
 		pickListDocumentos = new DualListModel<Documento>(getDocumentos(), new ArrayList<Documento>());
@@ -132,7 +163,11 @@ public class AdminInstituicaoBean extends BasicView<Instituicao>{
     	}
     }
     
-    public void addCampus(){
+    public void setCampus(Campus campus) {
+		this.campus = campus;
+	}
+
+	public void addCampus(){
     	campus = new Campus();
     	campus.setInstituicao(entity);
     	showCampus = true;

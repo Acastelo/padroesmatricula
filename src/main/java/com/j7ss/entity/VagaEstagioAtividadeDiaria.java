@@ -1,11 +1,3 @@
-/*
- * @version     1.0.0
- * @author      Edivando J. Alves
- * @contact     edivando@j7ss.com ( http://www.j7ss.com )
- * 
- * @copyright  	Copyright 2010 - 2016 J7 Smart Solutions, all rights reserved.
- * 
- */
 package com.j7ss.entity;
 
 import java.util.Date;
@@ -17,11 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import com.j7ss.core.DAO;
 import com.j7ss.core.DAOException;
@@ -36,30 +23,75 @@ import com.j7ss.entity.constraint.VagaEstagioAtividadeDiariaStatus;
  */
 @Entity
 @Table(name = "vaga_estagio_atividade_diaria")
-@ToString @EqualsAndHashCode(of={"id"})
 public class VagaEstagioAtividadeDiaria implements IGenericEntity<VagaEstagioAtividadeDiaria>{
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Getter @Setter
 	private Integer id;
 	
-	@Getter @Setter
 	private Date date;
 	
-	@Getter @Setter
 	private String descricao;
 	
-	@Getter @Setter
-	private Integer quantidadeHoras;
 	
 	@ManyToOne
-	@Getter @Setter
 	private VagaEstagio vagaEstagio;
 	
-	@Getter @Setter
+	private Integer quantidadeHoras;	
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public VagaEstagio getVagaEstagio() {
+		return vagaEstagio;
+	}
+
+	public void setVagaEstagio(VagaEstagio vagaEstagio) {
+		this.vagaEstagio = vagaEstagio;
+	}
+
+	public VagaEstagioAtividadeDiariaStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(VagaEstagioAtividadeDiariaStatus status) {
+		this.status = status;
+	}
+
+	public Integer getQuantidadeHoras() {
+		return quantidadeHoras;
+	}
+
+	public void setQuantidadeHoras(Integer quantidadeHoras) {
+		this.quantidadeHoras = quantidadeHoras;
+	}
+
+
+
+
 	private VagaEstagioAtividadeDiariaStatus status = VagaEstagioAtividadeDiariaStatus.NOVA;
 	
 	

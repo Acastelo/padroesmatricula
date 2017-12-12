@@ -1,11 +1,3 @@
-/*
- * @version     1.0.0
- * @author      Edivando J. Alves
- * @contact     edivando@j7ss.com ( http://www.j7ss.com )
- * 
- * @copyright  	Copyright 2010 - 2016 J7 Smart Solutions, all rights reserved.
- * 
- */
 package com.j7ss.entity;
 
 import java.util.ArrayList;
@@ -25,56 +17,73 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 import com.j7ss.core.DAO;
 import com.j7ss.core.DAOException;
 import com.j7ss.core.IGenericEntity;
 import com.j7ss.entity.constraint.DocumentoStatus;
 
-/**
- * 
- * @author Edivando Alves
- * @date  10/02/2016
- * 
- */
 @Entity
 @Table(name = "documento_vaga_estagio")
-@ToString @EqualsAndHashCode(of={"id"})
 public class DocumentoVagaEstagio implements IGenericEntity<DocumentoVagaEstagio> {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Getter @Setter
 	private Integer id;
 	
-	@Getter @Setter
 	private Integer ordem;
 	
-	@Getter @Setter
 	private DocumentoStatus status;
 
 	@ManyToOne
-	@Setter
 	private VagaEstagio vagaEstagio;
 	
 	@ManyToOne
-	@Setter
 	private Documento documento;
 	
 	@OneToMany(mappedBy="documentoVagaEstagio", fetch=FetchType.EAGER, cascade=CascadeType.REMOVE)
 	@Fetch(FetchMode.SUBSELECT)
 	@OrderBy("date")
-	@Setter
 	private List<DocumentoVagaEstagioMessage> documentoAlunoMessages;
 	
+	public Integer getId() {
+		return id;
+	}
 
-//******************************************************************************************************************************
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getOrdem() {
+		return ordem;
+	}
+
+	public void setOrdem(Integer ordem) {
+		this.ordem = ordem;
+	}
+
+	public DocumentoStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(DocumentoStatus status) {
+		this.status = status;
+	}
+
+	public void setVagaEstagio(VagaEstagio vagaEstagio) {
+		this.vagaEstagio = vagaEstagio;
+	}
+
+	public void setDocumento(Documento documento) {
+		this.documento = documento;
+	}
+
+	public void setDocumentoAlunoMessages(List<DocumentoVagaEstagioMessage> documentoAlunoMessages) {
+		this.documentoAlunoMessages = documentoAlunoMessages;
+	}
+
+	//******************************************************************************************************************************
 //## Builder
 	public DocumentoVagaEstagio id(Integer id){
 		this.id = id;

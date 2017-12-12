@@ -1,11 +1,3 @@
-/*
- * @version     1.0.0
- * @author      Edivando J. Alves
- * @contact     edivando@j7ss.com ( http://www.j7ss.com )
- * 
- * @copyright  	Copyright 2010 - 2016 J7 Smart Solutions, all rights reserved.
- * 
- */
 package com.j7ss.view.aluno;
 
 import java.io.Serializable;
@@ -14,9 +6,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-
-import lombok.Getter;
-import lombok.Setter;
 
 import com.j7ss.core.DAOException;
 import com.j7ss.core.Messages;
@@ -30,25 +19,17 @@ import com.j7ss.entity.constraint.DocumentoParse;
 import com.j7ss.entity.constraint.DocumentoStatus;
 import com.j7ss.view.LoginBean;
 
-/**
- * 
- * @author Edivando Alves
- * @date  10/02/2016
- * 
- */
 @ManagedBean
 @ViewScoped
 public class AlunoHomeBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	@Setter
 	@ManagedProperty(value="#{loginBean}")
 	private LoginBean loginBean;
 	
 	private VagaEstagio vagaEstagio; 
 	
-	@Setter
 	private VagaEstagioAtividadeDiaria atividadeDiaria;
 	
 	private List<VagaEstagio> vagasEstagio;
@@ -57,19 +38,81 @@ public class AlunoHomeBean implements Serializable{
 	private String docPage;
 	private DocumentoVagaEstagio documentoVagaEstagio;
 	
-	@Getter
 	private boolean grid = true;
-	@Getter
 	private boolean formEstagio;
-	@Getter
 	private boolean gridAtividade;
-	@Getter
 	private boolean documentos;
-	@Getter
 	private boolean documentoView;
-	@Getter
 	private boolean formAtividade;
 	
+	public LoginBean getLoginBean() {
+		return loginBean;
+	}
+
+	public void setLoginBean(LoginBean loginBean) {
+		this.loginBean = loginBean;
+	}
+
+	public boolean isGrid() {
+		return grid;
+	}
+
+	public void setGrid(boolean grid) {
+		this.grid = grid;
+	}
+
+	public boolean isFormEstagio() {
+		return formEstagio;
+	}
+
+	public void setFormEstagio(boolean formEstagio) {
+		this.formEstagio = formEstagio;
+	}
+
+	public boolean isGridAtividade() {
+		return gridAtividade;
+	}
+
+	public void setGridAtividade(boolean gridAtividade) {
+		this.gridAtividade = gridAtividade;
+	}
+
+	public boolean isDocumentos() {
+		return documentos;
+	}
+
+	public void setDocumentos(boolean documentos) {
+		this.documentos = documentos;
+	}
+
+	public boolean isDocumentoView() {
+		return documentoView;
+	}
+
+	public void setDocumentoView(boolean documentoView) {
+		this.documentoView = documentoView;
+	}
+
+	public boolean isFormAtividade() {
+		return formAtividade;
+	}
+
+	public void setFormAtividade(boolean formAtividade) {
+		this.formAtividade = formAtividade;
+	}
+
+	public void setAtividadeDiaria(VagaEstagioAtividadeDiaria atividadeDiaria) {
+		this.atividadeDiaria = atividadeDiaria;
+	}
+
+	public void setVagasEstagio(List<VagaEstagio> vagasEstagio) {
+		this.vagasEstagio = vagasEstagio;
+	}
+
+	public void setDocPage(String docPage) {
+		this.docPage = docPage;
+	}
+
 	public void documentos(){
 		if(loginBean.getUsuario().getAluno().isStatusValido()){
 			grid = false;

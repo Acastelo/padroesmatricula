@@ -1,11 +1,3 @@
-/*
- * @version     1.0.0
- * @author      Edivando J. Alves
- * @contact     edivando@j7ss.com ( http://www.j7ss.com )
- * 
- * @copyright  	Copyright 2010 - 2016 J7 Smart Solutions, all rights reserved.
- * 
- */
 package com.j7ss.entity;
 
 import java.util.ArrayList;
@@ -26,107 +18,226 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 import com.j7ss.core.DAO;
 import com.j7ss.core.DAOException;
 import com.j7ss.core.DateUtil;
 import com.j7ss.core.IGenericEntity;
 import com.j7ss.entity.constraint.AlunoStatus;
 
-/**
- * 
- * @author Edivando Alves
- * @date  10/02/2016
- * 
- */
 @Entity
 @Table(name = "aluno")
-@ToString @EqualsAndHashCode(of="id")
 public class Aluno implements IGenericEntity<Aluno>{
 
 	private static final long serialVersionUID = 1L;
+	
+	public Aluno() {
+	}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Getter @Setter
 	private Integer id;
 	
 	@Column(length=20) 
-	@Getter @Setter
 	private String matricula;
 	
 	@Column(length=20)
-	@Getter @Setter
 	private String telefone;
 	
 	@Column(length=20)
-	@Getter @Setter
 	private String celular;
 	
 	@Column(length=100)
-	@Getter @Setter
 	private String cvLattes;
 	
-	@Getter @Setter
 	private Integer semestreAtual;
 	
 	@Column(length=15)
-	@Getter @Setter
 	private String cpf;
 	
 	@Column(length=25)
-	@Getter @Setter
 	private String rg;
 	
-	@Getter @Setter
 	private Date dataNascimento;
 	
-	@Getter @Setter
 	private String endereco;
 	
 	@Column(length=10)
-	@Getter @Setter
 	private String numero;
 	
-	@Getter @Setter
 	private String complemento;
 	
-	@Getter @Setter
 	private String bairro;
 	
 	@Column(length=10)
-	@Getter @Setter
 	private String cep;
 	
-	@Getter @Setter
 	private String cidade;
 	
 	@Column(length=2)
-	@Getter @Setter
 	private String uf;
 	
-	@Getter @Setter
 	private AlunoStatus status = AlunoStatus.NOVO;
 	
 	@ManyToOne
-	@Setter
 	private Curso curso;
 	
 	@OneToOne(cascade=CascadeType.REMOVE)
-	@Setter
 	private Usuario usuario;
 	
 	@OneToMany(mappedBy="aluno", cascade=CascadeType.REMOVE)
 	@Fetch(FetchMode.JOIN)
-	@Setter
 	private List<VagaEstagio> vagasEstagio;
 
 	
-//******************************************************************************************************************************	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
+	public String getCvLattes() {
+		return cvLattes;
+	}
+
+	public void setCvLattes(String cvLattes) {
+		this.cvLattes = cvLattes;
+	}
+
+	public Integer getSemestreAtual() {
+		return semestreAtual;
+	}
+
+	public void setSemestreAtual(Integer semestreAtual) {
+		this.semestreAtual = semestreAtual;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getRg() {
+		return rg;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getUf() {
+		return uf;
+	}
+
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+
+	public AlunoStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(AlunoStatus status) {
+		this.status = status;
+	}
+
+	public void setCurso(Curso curso) {
+		this.curso = curso;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public void setVagasEstagio(List<VagaEstagio> vagasEstagio) {
+		this.vagasEstagio = vagasEstagio;
+	}
+
+	//******************************************************************************************************************************	
 //## Builder
 	public Aluno id(Integer id){
 		this.id = id;

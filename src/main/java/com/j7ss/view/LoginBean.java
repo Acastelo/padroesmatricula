@@ -1,11 +1,3 @@
-/*
- * @version     1.0.0
- * @author      Edivando J. Alves
- * @contact     edivando@j7ss.com ( http://www.j7ss.com )
- * 
- * @copyright  	Copyright 2010 - 2016 J7 Smart Solutions, all rights reserved.
- * 
- */
 package com.j7ss.view;
 
 import java.io.IOException;
@@ -15,27 +7,18 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import lombok.Setter;
-
 import com.j7ss.core.MD5;
 import com.j7ss.core.Messages;
 import com.j7ss.core.WebContext;
 import com.j7ss.entity.Usuario;
 import com.j7ss.entity.constraint.Page;
 
-/**
- * 
- * @author Edivando Alves
- * @date  10/02/2016
- * 
- */
 @ManagedBean
 @SessionScoped
 public class LoginBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	@Setter
 	private Usuario usuario;
 
 	public void login(){	
@@ -88,4 +71,9 @@ public class LoginBean implements Serializable{
 	public Usuario getUsuario() {
 		return usuario == null ? usuario = new Usuario() : usuario;
 	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
 }

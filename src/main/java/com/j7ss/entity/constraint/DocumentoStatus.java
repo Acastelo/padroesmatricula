@@ -1,21 +1,5 @@
-/*
- * @version     1.0.0
- * @author      Edivando J. Alves
- * @contact     edivando@j7ss.com ( http://www.j7ss.com )
- * 
- * @copyright  	Copyright 2010 - 2016 J7 Smart Solutions, all rights reserved.
- * 
- */
 package com.j7ss.entity.constraint;
 
-import lombok.Getter;
-
-/**
- * 
- * @author Edivando Alves
- * @date  10/02/2016
- * 
- */
 public enum DocumentoStatus {
 
 	// Documento não disponível para submeter
@@ -40,13 +24,34 @@ public enum DocumentoStatus {
 	CONCLUIDO("fa-check-circle", "", "Concluído");
 
 	
-	@Getter
 	private String icon;
-	@Getter
 	private String titulo;
-	@Getter
 	private String cor;
 	
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public String getCor() {
+		return cor;
+	}
+
+	public void setCor(String cor) {
+		this.cor = cor;
+	}
+
 	private DocumentoStatus(String icon, String cor, String titulo) {
 		this.icon = icon;
 		this.cor = cor;

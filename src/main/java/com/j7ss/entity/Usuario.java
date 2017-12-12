@@ -1,11 +1,3 @@
-/*
- * @version     1.0.0
- * @author      Edivando J. Alves
- * @contact     edivando@j7ss.com ( http://www.j7ss.com )
- * 
- * @copyright  	Copyright 2010 - 2016 J7 Smart Solutions, all rights reserved.
- * 
- */
 package com.j7ss.entity;
 
 import java.util.List;
@@ -18,67 +10,118 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 import com.j7ss.core.DAO;
 import com.j7ss.core.DAOException;
 import com.j7ss.core.IGenericEntity;
 import com.j7ss.core.MD5;
 import com.j7ss.entity.constraint.UsuarioType;
 
-/**
- * 
- * @author Edivando Alves
- * @date  10/02/2016
- * 
- */
 @Entity
 @Table(name = "usuario")
-@ToString(of={"nome", "email"}) @EqualsAndHashCode(of={"id"})
 public class Usuario implements IGenericEntity<Usuario>{
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Getter @Setter
 	private Integer id;
 	
-	@Getter @Setter
 	private String nome;
 	
 	@Column(unique=true, length=80)
-	@Getter @Setter
 	private String email;
 	
-	@Getter @Setter
 	private String senha;
 	
-	@Getter @Setter
 	private UsuarioType tipoUsuario;
 	
-	@Getter @Setter
 	private Boolean emailValido = false;
 	
-	@Getter @Setter
 	private Boolean ativo = true;
 	
-	@Getter @Setter
 	private String instituicaoFilter;
 	
 	@OneToOne
-	@Setter
 	private Instituicao instituicao;
 	
 	@OneToOne
-	@Setter
 	private Aluno aluno;
 	
 	
-//******************************************************************************************************************************
+	
+public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public UsuarioType getTipoUsuario() {
+		return tipoUsuario;
+	}
+
+	public void setTipoUsuario(UsuarioType tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
+	}
+
+	public Boolean getEmailValido() {
+		return emailValido;
+	}
+
+	public void setEmailValido(Boolean emailValido) {
+		this.emailValido = emailValido;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	public String getInstituicaoFilter() {
+		return instituicaoFilter;
+	}
+
+	public void setInstituicaoFilter(String instituicaoFilter) {
+		this.instituicaoFilter = instituicaoFilter;
+	}
+
+	public void setInstituicao(Instituicao instituicao) {
+		this.instituicao = instituicao;
+	}
+
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
+	}
+
+	//******************************************************************************************************************************
 //## Builder
 	public Usuario id(Integer id){
 		this.id = id;

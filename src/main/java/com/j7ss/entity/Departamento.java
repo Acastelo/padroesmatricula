@@ -1,11 +1,3 @@
-/*
- * @version     1.0.0
- * @author      Edivando J. Alves
- * @contact     edivando@j7ss.com ( http://www.j7ss.com )
- * 
- * @copyright  	Copyright 2010 - 2016 J7 Smart Solutions, all rights reserved.
- * 
- */
 package com.j7ss.entity;
 
 import java.util.ArrayList;
@@ -20,11 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -32,38 +19,58 @@ import com.j7ss.core.DAO;
 import com.j7ss.core.DAOException;
 import com.j7ss.core.IGenericEntity;
 
-/**
- * 
- * @author Edivando Alves
- * @date  10/02/2016
- * 
- */
 @Entity
 @Table(name = "departamento")
-@ToString(of={"nome"}) @EqualsAndHashCode(of={"id"})
 public class Departamento implements IGenericEntity<Departamento> {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Getter @Setter
 	private Integer id;
 	
-	@Getter @Setter
 	private String nome;
 	
 	@ManyToOne
-	@Getter @Setter
 	private Campus campus;
 	
 	@OneToMany(mappedBy="departamento", cascade=CascadeType.REMOVE)
 	@Fetch(FetchMode.JOIN)
-	@Getter @Setter
 	private List<Curso> cursos;
-
 	
-//******************************************************************************************************************************
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Campus getCampus() {
+		return campus;
+	}
+
+	public void setCampus(Campus campus) {
+		this.campus = campus;
+	}
+
+	public List<Curso> getCursos() {
+		return cursos;
+	}
+
+	public void setCursos(List<Curso> cursos) {
+		this.cursos = cursos;
+	}
+
+	//******************************************************************************************************************************
 //## Builder
 	public Departamento id(Integer id){
 		this.id = id;
@@ -121,4 +128,6 @@ public class Departamento implements IGenericEntity<Departamento> {
 	public static List<Departamento> findByNomeLike(Campus campus, String nome){
 		return dao.findByQuery("SELECT i FROM Departamento i WHERE i.campus = ?1 AND lower(i.nome) like ?2" , campus, "%"+nome.toLowerCase()+"%");
 	}
+
+	
 }

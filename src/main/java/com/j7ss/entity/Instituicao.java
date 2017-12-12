@@ -1,11 +1,3 @@
-/*
- * @version     1.0.0
- * @author      Edivando J. Alves
- * @contact     edivando@j7ss.com ( http://www.j7ss.com )
- * 
- * @copyright  	Copyright 2010 - 2016 J7 Smart Solutions, all rights reserved.
- * 
- */
 package com.j7ss.entity;
 
 import java.util.ArrayList;
@@ -20,11 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -32,49 +19,90 @@ import com.j7ss.core.DAO;
 import com.j7ss.core.DAOException;
 import com.j7ss.core.IGenericEntity;
 
-/**
- * 
- * @author Edivando Alves
- * @date  10/02/2016
- * 
- */
 @Entity
 @Table(name = "instituicao")
-@ToString(of={"nome"}) @EqualsAndHashCode(of={"id"})
 public class Instituicao implements IGenericEntity<Instituicao>{
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Getter @Setter
 	private Integer id;
 	
-	@Getter @Setter
 	private String nome;
 	
 	@Column(length=80)
-	@Getter @Setter
 	private String email;
 	
 	@Column(length=20)
-	@Getter @Setter
 	private String telefone;
 	
-	@Getter @Setter
 	private String responsavel;
 	
 	@OneToMany(mappedBy="instituicao", cascade=CascadeType.REMOVE)
 	@Fetch(FetchMode.JOIN)
-	@Getter @Setter
 	private List<Campus> campus;
 	
 	@OneToMany(mappedBy="instituicao")
-	@Getter @Setter
 	private List<Usuario> usuarios;
 	
-	
-//******************************************************************************************************************************
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getResponsavel() {
+		return responsavel;
+	}
+
+	public void setResponsavel(String responsavel) {
+		this.responsavel = responsavel;
+	}
+
+	public List<Campus> getCampus() {
+		return campus;
+	}
+
+	public void setCampus(List<Campus> campus) {
+		this.campus = campus;
+	}
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	//******************************************************************************************************************************
 //## Builder
 	public Instituicao id(Integer id){
 		this.id = id;
@@ -157,4 +185,5 @@ public class Instituicao implements IGenericEntity<Instituicao>{
 	public static Instituicao findByIdUsuario(Integer idUsuario){
 		return dao.findOneByQuery("SELECT i FROM Instituicao i WHERE i.idUsuario = ?1" , idUsuario);
 	}
+
 }

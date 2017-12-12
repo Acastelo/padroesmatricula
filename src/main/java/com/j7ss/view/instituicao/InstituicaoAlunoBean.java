@@ -1,11 +1,3 @@
-/*
- * @version     1.0.0
- * @author      Edivando J. Alves
- * @contact     edivando@j7ss.com ( http://www.j7ss.com )
- * 
- * @copyright  	Copyright 2010 - 2016 J7 Smart Solutions, all rights reserved.
- * 
- */
 package com.j7ss.view.instituicao;
 
 import java.util.List;
@@ -14,7 +6,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-import lombok.Setter;
 
 import com.j7ss.core.BasicView;
 import com.j7ss.core.DAOException;
@@ -25,18 +16,11 @@ import com.j7ss.entity.Aluno;
 import com.j7ss.entity.constraint.AlunoStatus;
 import com.j7ss.view.LoginBean;
 
-/**
- * 
- * @author Edivando Alves
- * @date  10/02/2016
- * 
- */
 @ManagedBean
 @ViewScoped
 public class InstituicaoAlunoBean extends BasicView<Aluno>{
 	private static final long serialVersionUID = 1L;
 	
-	@Setter
 	@ManagedProperty(value="#{loginBean}")
 	private LoginBean loginBean;
 	
@@ -80,7 +64,15 @@ public class InstituicaoAlunoBean extends BasicView<Aluno>{
 		grid();
 	}
 	
-//******************************************************************************************************************************
+	public LoginBean getLoginBean() {
+		return loginBean;
+	}
+
+	public void setLoginBean(LoginBean loginBean) {
+		this.loginBean = loginBean;
+	}
+
+	//******************************************************************************************************************************
 //## Getters Setters
 	@Override
 	public Aluno getEntity() {

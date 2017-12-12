@@ -1,22 +1,5 @@
-/*
- * @version     1.0.0
- * @author      Edivando J. Alves
- * @contact     edivando@j7ss.com ( http://www.j7ss.com )
- * 
- * @copyright  	Copyright 2010 - 2016 J7 Smart Solutions, all rights reserved.
- * 
- */
 package com.j7ss.entity.constraint;
 
-import lombok.Getter;
-import lombok.Setter;
-
-/**
- * 
- * @author Edivando Alves
- * @date  11/02/2016
- * 
- */
 public enum DocumentoKey {
 	
 	// Usuario
@@ -98,20 +81,53 @@ public enum DocumentoKey {
 	ALUNO_CURSO_ORIENTADOR_TELEFONE(	"CURSO", "`&&ALUNO_CURSO_ORIENTADOR_TELEFONE&&`"),
 	ALUNO_CURSO_ORIENTADOR_EMAIL(		"CURSO", "`&&ALUNO_CURSO_ORIENTADOR_EMAIL&&`");
 	
-	@Getter @Setter
 	private String professorOrientador;
-	@Getter @Setter
 	private String professorOrientadorTelefone;
-	@Getter @Setter
 	private String professorOrientadorEmail;
-	
-	@Getter @Setter
 	private Integer duracaoEstagio;
-	
-	
-	@Getter
 	private String key;
 	private String group;
+	
+	public String getProfessorOrientador() {
+		return professorOrientador;
+	}
+
+	public void setProfessorOrientador(String professorOrientador) {
+		this.professorOrientador = professorOrientador;
+	}
+
+	public String getProfessorOrientadorTelefone() {
+		return professorOrientadorTelefone;
+	}
+
+	public void setProfessorOrientadorTelefone(String professorOrientadorTelefone) {
+		this.professorOrientadorTelefone = professorOrientadorTelefone;
+	}
+
+	public String getProfessorOrientadorEmail() {
+		return professorOrientadorEmail;
+	}
+
+	public void setProfessorOrientadorEmail(String professorOrientadorEmail) {
+		this.professorOrientadorEmail = professorOrientadorEmail;
+	}
+
+	public Integer getDuracaoEstagio() {
+		return duracaoEstagio;
+	}
+
+	public void setDuracaoEstagio(Integer duracaoEstagio) {
+		this.duracaoEstagio = duracaoEstagio;
+	}
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+
 	
 	private DocumentoKey(String group, String key) {
 		this.key = key;

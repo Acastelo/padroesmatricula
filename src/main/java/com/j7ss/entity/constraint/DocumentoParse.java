@@ -11,12 +11,6 @@ package com.j7ss.entity.constraint;
 import com.github.rjeschke.txtmark.Processor;
 import com.j7ss.entity.DocumentoVagaEstagio;
 
-/**
- * 
- * @author Edivando Alves
- * @date  10/02/2016
- * 
- */
 public class DocumentoParse {
 
 	private DocumentoVagaEstagio documentoVagaEstagio;

@@ -1,11 +1,3 @@
-/*
- * @version     1.0.0
- * @author      Edivando J. Alves
- * @contact     edivando@j7ss.com ( http://www.j7ss.com )
- * 
- * @copyright  	Copyright 2010 - 2016 J7 Smart Solutions, all rights reserved.
- * 
- */
 package com.j7ss.core;
 
 import java.io.Serializable;
@@ -16,12 +8,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-/**
- * 
- * @author Edivando Alves
- * @date  10/02/2016
- * 
- */
 public class DAO<T extends IGenericEntity<T>>{
 
 	private final Class<T> clazz;
@@ -225,7 +211,7 @@ public class DAO<T extends IGenericEntity<T>>{
 
 		private GenericJPA() {
 			if (entityManagerFactory == null) {
-				entityManagerFactory = Persistence.createEntityManagerFactory("ifce_estagio_postgree"); 
+				entityManagerFactory = Persistence.createEntityManagerFactory("estagio_postgres"); 
 			}
 		}
 
@@ -239,7 +225,14 @@ public class DAO<T extends IGenericEntity<T>>{
 		public EntityManagerFactory getEntityManagerFactory() {
 			return entityManagerFactory;
 		}
+		
+		/*public static void main(String[] args) {
+	        EntityManagerFactory factory = Persistence
+	                .createEntityManagerFactory("estagio_postgres");
+	        factory.close();
+		}*/
 	}
+	
 }
 
 

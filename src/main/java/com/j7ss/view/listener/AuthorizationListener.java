@@ -1,11 +1,3 @@
-/*
- * @version     1.0.0
- * @author      Edivando J. Alves
- * @contact     edivando@j7ss.com ( http://www.j7ss.com )
- * 
- * @copyright  	Copyright 2010 - 2016 J7 Smart Solutions, all rights reserved.
- * 
- */
 package com.j7ss.view.listener;
 
 import java.io.IOException;
@@ -22,12 +14,6 @@ import javax.servlet.http.HttpSession;
 import com.j7ss.entity.constraint.Page;
 import com.j7ss.view.LoginBean;
 
-/**
- * 
- * @author Edivando Alves
- * @date  10/02/2016
- * 
- */
 public class AuthorizationListener implements PhaseListener {
 
 	private static final long serialVersionUID = 1L;

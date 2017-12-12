@@ -1,11 +1,3 @@
-/*
- * @version     1.0.0
- * @author      Edivando J. Alves
- * @contact     edivando@j7ss.com ( http://www.j7ss.com )
- * 
- * @copyright  	Copyright 2010 - 2016 J7 Smart Solutions, all rights reserved.
- * 
- */
 package com.j7ss.entity;
 
 import java.util.ArrayList;
@@ -21,11 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -33,53 +20,119 @@ import com.j7ss.core.DAO;
 import com.j7ss.core.DAOException;
 import com.j7ss.core.IGenericEntity;
 
-/**
- * 
- * @author Edivando Alves
- * @date  10/02/2016
- * 
- */
 @Entity
 @Table(name = "curso")
-@ToString(of={"nome"}) @EqualsAndHashCode(of={"id"})
 public class Curso implements IGenericEntity<Curso>{
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Getter @Setter
 	private Integer id;
 	
-	@Getter @Setter
 	private String nome;
 	
-	@Getter @Setter
 	private String professorOrientador;
-	@Getter @Setter
 	private String professorOrientadorTelefone;
-	@Getter @Setter
 	private String professorOrientadorEmail;
 	
-	@Getter @Setter
 	private Integer duracaoEstagio;
 	
 	@ManyToOne
-	@Getter @Setter
 	private Departamento departamento;
 	
 	@OneToMany(mappedBy="curso", cascade=CascadeType.REMOVE)
 	@Fetch(FetchMode.JOIN)
 	@OrderBy("ordem")
-	@Getter @Setter
 	private List<DocumentoCurso> documentoCursos;
 	
 	@OneToMany(mappedBy="curso")
-	@Getter @Setter
 	private List<Aluno> alunos;
-		
 	
-//******************************************************************************************************************************
+	@ManyToOne
+	private Professor professor;
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getProfessorOrientador() {
+		return professorOrientador;
+	}
+
+	public void setProfessorOrientador(String professorOrientador) {
+		this.professorOrientador = professorOrientador;
+	}
+
+	public String getProfessorOrientadorTelefone() {
+		return professorOrientadorTelefone;
+	}
+
+	public void setProfessorOrientadorTelefone(String professorOrientadorTelefone) {
+		this.professorOrientadorTelefone = professorOrientadorTelefone;
+	}
+
+	public String getProfessorOrientadorEmail() {
+		return professorOrientadorEmail;
+	}
+
+	public void setProfessorOrientadorEmail(String professorOrientadorEmail) {
+		this.professorOrientadorEmail = professorOrientadorEmail;
+	}
+
+	public Integer getDuracaoEstagio() {
+		return duracaoEstagio;
+	}
+
+	public void setDuracaoEstagio(Integer duracaoEstagio) {
+		this.duracaoEstagio = duracaoEstagio;
+	}
+
+	public Departamento getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(Departamento departamento) {
+		this.departamento = departamento;
+	}
+
+	public List<DocumentoCurso> getDocumentoCursos() {
+		return documentoCursos;
+	}
+
+	public void setDocumentoCursos(List<DocumentoCurso> documentoCursos) {
+		this.documentoCursos = documentoCursos;
+	}
+
+	public List<Aluno> getAlunos() {
+		return alunos;
+	}
+
+	public void setAlunos(List<Aluno> alunos) {
+		this.alunos = alunos;
+	}
+
+	public Professor getProfessor() {
+		return professor;
+	}
+
+	public void setProfessor(Professor professor) {
+		this.professor = professor;
+	}
+
+	//******************************************************************************************************************************
 //## Builder
 	public Curso id(Integer id){
 		this.id = id;
