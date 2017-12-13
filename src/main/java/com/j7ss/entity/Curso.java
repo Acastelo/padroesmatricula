@@ -1,13 +1,9 @@
 package com.j7ss.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
@@ -16,22 +12,11 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.j7ss.core.DAO;
-import com.j7ss.core.DAOException;
-import com.j7ss.core.IGenericEntity;
-
 @Entity
 @Table(name = "curso")
-public class Curso implements IGenericEntity<Curso>{
+public class Curso extends BaseEntity<Integer>{
 
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
-	
 	private String nome;
-	
 	private String professorOrientador;
 	private String professorOrientadorTelefone;
 	private String professorOrientadorEmail;
@@ -51,14 +36,6 @@ public class Curso implements IGenericEntity<Curso>{
 	
 	@ManyToOne
 	private Professor professor;
-	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getNome() {
 		return nome;
@@ -132,76 +109,44 @@ public class Curso implements IGenericEntity<Curso>{
 		this.professor = professor;
 	}
 
-	//******************************************************************************************************************************
-//## Builder
-	public Curso id(Integer id){
-		this.id = id;
-		return this;
-	}
-	
-	public Curso nome(String nome){
-		this.nome = nome;
-		return this;
-	}
-	
-	public Curso departamento(Departamento departamento){
-		this.departamento = departamento;
-		return this;
-	}
-	
-	public Curso documentoCursos(List<DocumentoCurso> documentoCursos){
-		this.documentoCursos = documentoCursos;
-		return this;
-	}
-	
-	
-//******************************************************************************************************************************
-//## Getters Setters
 	@Override
-	public boolean isNew() {
-		return id == null;
-	}
-	
-	public List<Documento> getDocumentos(){
-		List<Documento> documentos = new ArrayList<>();
-		for (DocumentoCurso dc : documentoCursos) {
-			documentos.add(dc.getDocumento());
-		}
-		return documentos;
-	}
-	
-	public void setDocumentos(List<Documento> documentos) throws DAOException{
-		if(documentoCursos != null){
-			for (DocumentoCurso dcs : documentoCursos) {
-				dcs.remove();
-			}
-		}
-		documentoCursos = new ArrayList<>();
-		for (int i = 0; i < documentos.size(); i++) {
-			documentoCursos.add( new DocumentoCurso(this).documento(documentos.get(i)).ordem(i).save() );
-		}
-	}
-	
-	
-//******************************************************************************************************************************
-//## DAO
-	private static DAO<Curso> dao = new DAO<Curso>(Curso.class);
-	
-	@Override
-	public Curso save() throws DAOException{
-		return isNew() ? dao.add(this) : dao.update(this);
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((professor == null) ? 0 : professor.hashCode());
+		return result;
 	}
 
 	@Override
-	public boolean remove() throws DAOException {
-		return dao.remove(this);
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Curso other = (Curso) obj;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (professor == null) {
+			if (other.professor != null)
+				return false;
+		} else if (!professor.equals(other.professor))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Curso [nome=" + nome + ", professorOrientador=" + professorOrientador + ", professorOrientadorTelefone="
+				+ professorOrientadorTelefone + ", professorOrientadorEmail=" + professorOrientadorEmail
+				+ ", duracaoEstagio=" + duracaoEstagio + ", departamento=" + departamento + ", documentoCursos="
+				+ documentoCursos + ", alunos=" + alunos + ", professor=" + professor + "]";
 	}
 	
-	public static Curso findById(Integer idCurso){
-		return dao.findOne(idCurso);
-	}
 	
-	public static List<Curso> findByNomeLike(Departamento departamento, String nome){
-		return dao.findByQuery("SELECT i FROM Curso i WHERE i.departamento = ?1 AND lower(i.nome) like ?2" ,departamento, "%"+nome.toLowerCase()+"%");
-	}
 }

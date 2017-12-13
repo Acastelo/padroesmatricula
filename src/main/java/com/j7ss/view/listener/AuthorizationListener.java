@@ -36,14 +36,14 @@ public class AuthorizationListener implements PhaseListener {
 				paginaDestino = getNamePage(paginaDestino);
 				HttpSession session = (HttpSession) event.getFacesContext().getExternalContext().getSession(false);
 
-				LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");			
+				/*LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");			
 				if( !isPermissionPublicPage( paginaDestino ) ){
 					if(loginBean == null || loginBean.getUsuario() == null || loginBean.getUsuario().isNew()){	
 						redirect(Page.INDEX);
 					}else if( !loginBean.isPagePermission( paginaDestino ) ){
 						redirect(Page.ERRO_ACESSO_NEGADO);
 					}	
-				}		
+				}*/		
 			}
 		}
 	}

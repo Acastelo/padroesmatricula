@@ -23,7 +23,8 @@ public class DocumentoConverter implements Converter, Serializable {
 	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		return adminInstituicaoBean.getDocumentoByNome(value);
+		//return adminInstituicaoBean.getDocumentoByNome(value);
+		return null;
 	}
 
 	@Override

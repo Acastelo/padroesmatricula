@@ -12,6 +12,8 @@ import com.j7ss.core.Messages;
 import com.j7ss.core.WebContext;
 import com.j7ss.core.email.EmailTemplate;
 import com.j7ss.core.email.MailApi;
+import com.j7ss.dao.AlunoDao;
+import com.j7ss.dao.InstituicaoDao;
 import com.j7ss.entity.Aluno;
 import com.j7ss.entity.Campus;
 import com.j7ss.entity.Curso;
@@ -26,10 +28,12 @@ public class AlunoCadastroBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Aluno aluno;
-	
-	private Instituicao instituicao = new Instituicao();
 	private Campus campus = new Campus();
+	private Instituicao instituicao = new Instituicao();
 	private Departamento departamento = new Departamento();
+	
+	private InstituicaoDao instituicaoDao = new InstituicaoDao();
+	private AlunoDao alunoDao = new AlunoDao();
 	
 	public Instituicao getInstituicao() {
 		return instituicao;
@@ -59,38 +63,12 @@ public class AlunoCadastroBean implements Serializable {
 		this.aluno = aluno;
 	}
 
-	@PostConstruct
-	public void init(){
-		List<Instituicao> list = Instituicao.findAll();
-		if(list != null && list.size() > 0){
-			instituicao = list.get(0);
-		}
-	}
-	
 	public void save(){
 		try {
 			String password = aluno.getUsuario().getSenha();
-			aluno.getUsuario()
-					.senha(MD5.md5(aluno.getUsuario().getSenha()))
-					.ativo(true)
-					.tipoUsuario(UsuarioType.ALUNO)
-					.save();
-			aluno.save();
-			aluno.getUsuario().aluno(aluno).save();
 			
-			// Enviar email
-			new MailApi()
-				.to(aluno.getUsuario().getEmail(), aluno.getUsuario().getNome())
-				.subject("Bem vindo ao IFCE Estágios")
-				.html(EmailTemplate.confirmEmail(aluno.getUsuario().getNome(), aluno.getUsuario().getEmail(), password, aluno.getId()))
-				.send();
-			
-			
-			
-//			new MailApi()
-//				.to(aluno.getUsuario().getEmail(), aluno.getUsuario().getNome())
-//				.message("IFCE Estágio: Confirme seu cadastro!", MailTemplate.confirmEmail(aluno.getUsuario()))
-//				.send();
+			aluno.getUsuario().setSenha(MD5.md5(password));
+			alunoDao.save(aluno);
 			
 			Messages.showGrowlInfo("Cadastro de Alunos", "Cadastrado com sucesso!");
 			instituicao = new Instituicao();
@@ -103,18 +81,6 @@ public class AlunoCadastroBean implements Serializable {
 		}
 	}
 	
-	public List<Campus> searchCampus(String nome){
-		return Campus.findByNomeLike(instituicao, nome);
-	}
-	
-	public List<Departamento> searchDepartamentos(String nome){
-		return Departamento.findByNomeLike(campus, nome);
-	}
-	
-	public List<Curso> searchCursos(String nome){
-		return Curso.findByNomeLike(departamento, nome);
-	}
-
 	
 	//########
 	// Converts

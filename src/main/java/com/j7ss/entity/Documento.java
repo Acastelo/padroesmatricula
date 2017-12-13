@@ -4,27 +4,14 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
-import com.j7ss.core.DAO;
-import com.j7ss.core.DAOException;
-import com.j7ss.core.IGenericEntity;
-
 @Entity
 @Table(name = "documento")
-public class Documento implements IGenericEntity<Documento> {
+public class Documento extends BaseEntity<Integer>{
 
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
-	
 	private String nome;
 	
 	private String titulo;
@@ -51,14 +38,6 @@ public class Documento implements IGenericEntity<Documento> {
 	@OrderBy("ordem")
 	private List<DocumentoVagaEstagio> documentoVagasEstagio;
 	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -131,67 +110,48 @@ public class Documento implements IGenericEntity<Documento> {
 		this.documentoVagasEstagio = documentoVagasEstagio;
 	}
 
-	//******************************************************************************************************************************
-//## Builder
-	public Documento id(Integer id){
-		this.id = id;
-		return this;
-	}
-	
-	public Documento nome(String nome){
-		this.nome = nome;
-		return this;
-	}
-	
-	public Documento titulo(String titulo){
-		this.titulo = titulo;
-		return this;
-	}
-	
-	public Documento descricao(String descricao){
-		this.descricao = descricao;
-		return this;
-	}
-	
-	public Documento extra(Boolean extra){
-		this.extra = extra;
-		return this;
-	}
-	
-	public Documento obrigatorio(Boolean obrigatorio){
-		this.obrigatorio = obrigatorio;
-		return this;
-	}
-	
-	public Documento htmlPage(String htmlPage){
-		this.htmlPage = htmlPage;
-		return this;
-	}
-	
-	
-//******************************************************************************************************************************
-//## Getters Setters
 	@Override
-	public boolean isNew() {
-		return id == null;
-	}	
-	
-//******************************************************************************************************************************	
-//## DAO
-	private static DAO<Documento> dao = new DAO<Documento>(Documento.class);
-	
-	@Override
-	public Documento save() throws DAOException{
-		return isNew() ? dao.add(this) : dao.update(this);
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((keys == null) ? 0 : keys.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
+		return result;
 	}
 
 	@Override
-	public boolean remove() throws DAOException {
-		return dao.remove(this);
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Documento other = (Documento) obj;
+		if (keys == null) {
+			if (other.keys != null)
+				return false;
+		} else if (!keys.equals(other.keys))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (titulo == null) {
+			if (other.titulo != null)
+				return false;
+		} else if (!titulo.equals(other.titulo))
+			return false;
+		return true;
 	}
-	
-	public static List<Documento> findAll(){
-		return dao.findAll();
+
+	@Override
+	public String toString() {
+		return "Documento [nome=" + nome + ", titulo=" + titulo + ", descricao=" + descricao + ", htmlPage=" + htmlPage
+				+ ", extra=" + extra + ", obrigatorio=" + obrigatorio + ", keys=" + keys + ", documentoCursos="
+				+ documentoCursos + ", documentoVagasEstagio=" + documentoVagasEstagio + "]";
 	}
 	
 }

@@ -1,34 +1,20 @@
 package com.j7ss.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.j7ss.core.DAO;
-import com.j7ss.core.DAOException;
-import com.j7ss.core.IGenericEntity;
-
 @Entity
 @Table(name = "instituicao")
-public class Instituicao implements IGenericEntity<Instituicao>{
+public class Instituicao extends BaseEntity<Integer>{
 
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
-	
 	private String nome;
 	
 	@Column(length=80)
@@ -46,14 +32,6 @@ public class Instituicao implements IGenericEntity<Instituicao>{
 	@OneToMany(mappedBy="instituicao")
 	private List<Usuario> usuarios;
 	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -102,88 +80,41 @@ public class Instituicao implements IGenericEntity<Instituicao>{
 		this.usuarios = usuarios;
 	}
 
-	//******************************************************************************************************************************
-//## Builder
-	public Instituicao id(Integer id){
-		this.id = id;
-		return this;
-	}
-	
-	public Instituicao nome(String nome){
-		this.nome = nome;
-		return this;
-	}
-	
-	public Instituicao email(String email){
-		this.email = email;
-		return this;
-	}
-	
-	public Instituicao telefone(String telefone){
-		this.telefone = telefone;
-		return this;
-	}
-	
-	public Instituicao responsavel(String responsavel){
-		this.responsavel = responsavel;
-		return this;
-	}
-	
-	public Instituicao addCampus(Campus campu){
-		if(campus == null){
-			campus = new  ArrayList<>();
-		}
-		campus.add(campu);
-		return this;
-	}
-	
-	public Instituicao removeCampus(Campus campu){
-		if(campus != null){
-			campus.remove(campu);
-		}
-		return this;
-	}
-	
-//******************************************************************************************************************************
-//## Getters Setters
 	@Override
-	public boolean isNew() {
-		return id == null;
-	}
-
-	
-//******************************************************************************************************************************
-//## DAO
-	private static DAO<Instituicao> dao = new DAO<Instituicao>(Instituicao.class);
-	
-	@Override
-	public Instituicao save() throws DAOException{
-		return isNew() ? dao.add(this) : dao.update(this);
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((responsavel == null) ? 0 : responsavel.hashCode());
+		return result;
 	}
 
 	@Override
-	public boolean remove() throws DAOException {
-		return dao.remove(this);
-	}
-	
-	public static List<Instituicao> findAll(){
-		return dao.findByQuery("SELECT i FROM Instituicao i"); //JOIN FETCH i.campus c
-	}
-	
-	public static Instituicao findById(Integer idInstituicao){
-		return dao.findOne(idInstituicao);
-	}
-	
-	public static List<Instituicao> findByNomeLike(String nome){
-		return dao.findByQuery("SELECT i FROM Instituicao i WHERE lower(i.nome) like ?1" , "%"+nome.toLowerCase()+"%");
-	}
-	
-	public static List<Instituicao> findByNome(String nome){
-		return dao.findByQuery("SELECT i FROM Instituicao i WHERE i.nome = ?1" , nome);
-	}
-	
-	public static Instituicao findByIdUsuario(Integer idUsuario){
-		return dao.findOneByQuery("SELECT i FROM Instituicao i WHERE i.idUsuario = ?1" , idUsuario);
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Instituicao other = (Instituicao) obj;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (responsavel == null) {
+			if (other.responsavel != null)
+				return false;
+		} else if (!responsavel.equals(other.responsavel))
+			return false;
+		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Instituicao [nome=" + nome + ", email=" + email + ", telefone=" + telefone + ", responsavel="
+				+ responsavel + ", campus=" + campus + ", usuarios=" + usuarios + "]";
+	}
+	
 }

@@ -4,26 +4,13 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.j7ss.core.DAO;
-import com.j7ss.core.DAOException;
-import com.j7ss.core.IGenericEntity;
-
 @Entity
 @Table(name = "empresa")
-public class Empresa implements IGenericEntity<Empresa>{
+public class Empresa extends BaseEntity<Integer>{
 
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
-	
 	private String nome;
 	
 	@Column(length=80)
@@ -63,14 +50,6 @@ public class Empresa implements IGenericEntity<Empresa>{
 	@OneToMany(mappedBy="empresa")
 	private List<EmpresaSupervisor> empresaSupervisors;
 		
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -191,95 +170,49 @@ public class Empresa implements IGenericEntity<Empresa>{
 		this.empresaSupervisors = empresaSupervisors;
 	}
 
-	//******************************************************************************************************************************
-//## Builder
-	public Empresa id(Integer id){
-		this.id = id;
-		return this;
-	}
-	
-	public Empresa nome(String nome){
-		this.nome = nome;
-		return this;
-	}
-	
-	public Empresa email(String email){
-		this.email = email;
-		return this;
-	}
-	
-	public Empresa telefone(String telefone){
-		this.telefone = telefone;
-		return this;
-	}
-	
-	public Empresa cnpj(String cnpj){
-		this.cnpj = cnpj;
-		return this;
-	}
-	
-	public Empresa site(String site){
-		this.site = site;
-		return this;
-	}
-	
-	public Empresa ramoAtividade(String ramoAtividade){
-		this.ramoAtividade = ramoAtividade;
-		return this;
-	}
-
-	public Empresa endereco(String endereco){
-		this.endereco = endereco;
-		return this;
-	}
-	
-	public Empresa bairro(String bairro){
-		this.bairro = bairro;
-		return this;
-	}
-	
-	public Empresa cep(String cep){
-		this.cep = cep;
-		return this;
-	}
-	
-	public Empresa cidade(String cidade){
-		this.cidade = cidade;
-		return this;
-	}
-	
-	public Empresa uf(String uf){
-		this.uf = uf;
-		return this;
-	}
-	
-//******************************************************************************************************************************
-//## Getters Setters
 	@Override
-	public boolean isNew() {
-		return id == null;
-	}
-	
-	
-//******************************************************************************************************************************
-//## DAO
-	private static DAO<Empresa> dao = new DAO<Empresa>(Empresa.class);
-	
-	@Override
-	public Empresa save() throws DAOException{
-		return isNew() ? dao.add(this) : dao.update(this);
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((cnpj == null) ? 0 : cnpj.hashCode());
+		result = prime * result + ((empresaSupervisors == null) ? 0 : empresaSupervisors.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
 	}
 
 	@Override
-	public boolean remove() throws DAOException {
-		return dao.remove(this);
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Empresa other = (Empresa) obj;
+		if (cnpj == null) {
+			if (other.cnpj != null)
+				return false;
+		} else if (!cnpj.equals(other.cnpj))
+			return false;
+		if (empresaSupervisors == null) {
+			if (other.empresaSupervisors != null)
+				return false;
+		} else if (!empresaSupervisors.equals(other.empresaSupervisors))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		return true;
 	}
-	
-	public static List<Empresa> findAll(){
-		return dao.findAll();
+
+	@Override
+	public String toString() {
+		return "Empresa [nome=" + nome + ", email=" + email + ", telefone=" + telefone + ", fax=" + fax + ", cnpj="
+				+ cnpj + ", site=" + site + ", ramoAtividade=" + ramoAtividade + ", endereco=" + endereco + ", numero="
+				+ numero + ", bairro=" + bairro + ", cep=" + cep + ", uf=" + uf + ", cidade=" + cidade
+				+ ", vagaEstagios=" + vagaEstagios + ", empresaSupervisors=" + empresaSupervisors + "]";
 	}
-	
-	public static Empresa findByIdUsuario(Integer idUsuario){
-		return dao.findOneByQuery("SELECT e FROM Empresa e WHERE e.idUsuario = ?1" , idUsuario);
-	}
+
 }

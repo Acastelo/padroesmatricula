@@ -1,11 +1,3 @@
-/*
- * @version     1.0.0
- * @author      Edivando J. Alves
- * @contact     edivando@j7ss.com ( http://www.j7ss.com )
- * 
- * @copyright  	Copyright 2010 - 2016 J7 Smart Solutions, all rights reserved.
- * 
- */
 package com.j7ss.entity.constraint;
 
 import com.github.rjeschke.txtmark.Processor;
@@ -56,41 +48,8 @@ public class DocumentoParse {
 		case ALUNO_TELEFONE:
 			replace(lenght, DocumentoKey.ALUNO_TELEFONE, documentoVagaEstagio.getVagaEstagio().getAluno().getTelefone());
 			break;
-		case ALUNO_CELULAR:	
-			replace(lenght, DocumentoKey.ALUNO_CELULAR, documentoVagaEstagio.getVagaEstagio().getAluno().getCelular());
-			break;
-		case ALUNO_CV_LATTES:
-			replace(lenght, DocumentoKey.ALUNO_CV_LATTES, documentoVagaEstagio.getVagaEstagio().getAluno().getCvLattes());
-			break;
 		case ALUNO_CPF:
 			replace(lenght, DocumentoKey.ALUNO_CPF, documentoVagaEstagio.getVagaEstagio().getAluno().getCpf());
-			break;
-		case ALUNO_RG:
-			replace(lenght, DocumentoKey.ALUNO_RG, documentoVagaEstagio.getVagaEstagio().getAluno().getRg());
-			break;
-		case ALUNO_DATA_NASCIMENTO:
-			replace(lenght, DocumentoKey.ALUNO_DATA_NASCIMENTO, documentoVagaEstagio.getVagaEstagio().getAluno().getDataNascimentoFormat());
-			break;
-		case ALUNO_ENDERECO_ENDERECO:
-			replace(lenght, DocumentoKey.ALUNO_ENDERECO_ENDERECO, documentoVagaEstagio.getVagaEstagio().getAluno().getEndereco());
-			break;
-		case ALUNO_ENDERECO_NUMERO:
-			replace(lenght, DocumentoKey.ALUNO_ENDERECO_NUMERO, documentoVagaEstagio.getVagaEstagio().getAluno().getNumero());
-			break;
-		case ALUNO_ENDERECO_COMPLEMENTO:
-			replace(lenght, DocumentoKey.ALUNO_ENDERECO_COMPLEMENTO, documentoVagaEstagio.getVagaEstagio().getAluno().getComplemento());
-			break;
-		case ALUNO_ENDERECO_BAIRRO:
-			replace(lenght, DocumentoKey.ALUNO_ENDERECO_BAIRRO, documentoVagaEstagio.getVagaEstagio().getAluno().getBairro());
-			break;
-		case ALUNO_ENDERECO_CEP:
-			replace(lenght, DocumentoKey.ALUNO_ENDERECO_CEP, documentoVagaEstagio.getVagaEstagio().getAluno().getCep());
-			break;
-		case ALUNO_ENDERECO_CIDADE:
-			replace(lenght, DocumentoKey.ALUNO_ENDERECO_CIDADE, documentoVagaEstagio.getVagaEstagio().getAluno().getCidade());
-			break;
-		case ALUNO_ENDERECO_UF:
-			replace(lenght, DocumentoKey.ALUNO_ENDERECO_UF, documentoVagaEstagio.getVagaEstagio().getAluno().getUf());
 			break;
 			
 			// Vaga Estagio
@@ -104,22 +63,22 @@ public class DocumentoParse {
 			replace(lenght, DocumentoKey.ESTAGIO_TURNO, documentoVagaEstagio.getVagaEstagio().getTurno());
 			break;
 		case ESTAGIO_HORA_INICIO_ESTAGIO:
-			replace(lenght, DocumentoKey.ESTAGIO_HORA_INICIO_ESTAGIO, documentoVagaEstagio.getVagaEstagio().getHoraInicioEstagioFormat());
+			replace(lenght, DocumentoKey.ESTAGIO_HORA_INICIO_ESTAGIO, documentoVagaEstagio.getVagaEstagio().getHoraInicioEstagio());
 			break;
 		case ESTAGIO_HORA_FIM_INTERVALO:
-			replace(lenght, DocumentoKey.ESTAGIO_HORA_FIM_INTERVALO, documentoVagaEstagio.getVagaEstagio().getHoraFimOuIntervaloFormat());
+			replace(lenght, DocumentoKey.ESTAGIO_HORA_FIM_INTERVALO, documentoVagaEstagio.getVagaEstagio().getHoraFimOuIntervalo());
 			break;
 		case ESTAGIO_HORA_RETORNO:
-			replace(lenght, DocumentoKey.ESTAGIO_HORA_RETORNO, documentoVagaEstagio.getVagaEstagio().getHoraRetornoFormat());
+			replace(lenght, DocumentoKey.ESTAGIO_HORA_RETORNO, documentoVagaEstagio.getVagaEstagio().getHoraRetorno());
 			break;
 		case ESTAGIO_HORA_FIM_ESTAGIO:
-			replace(lenght, DocumentoKey.ESTAGIO_HORA_FIM_ESTAGIO, documentoVagaEstagio.getVagaEstagio().getHoraFimEstagioFormat());
+			replace(lenght, DocumentoKey.ESTAGIO_HORA_FIM_ESTAGIO, documentoVagaEstagio.getVagaEstagio().getHoraFimEstagio());
 			break;
 		case ESTAGIO_VIGENCIA_INICIO:
-			replace(lenght, DocumentoKey.ESTAGIO_VIGENCIA_INICIO, documentoVagaEstagio.getVagaEstagio().getVigenciaInicioFormat());
+			replace(lenght, DocumentoKey.ESTAGIO_VIGENCIA_INICIO, documentoVagaEstagio.getVagaEstagio().getVigenciaInicio());
 			break;
 		case ESTAGIO_VIGENCIA_FIM:
-			replace(lenght, DocumentoKey.ESTAGIO_VIGENCIA_FIM, documentoVagaEstagio.getVagaEstagio().getVigenciaFimFormat());
+			replace(lenght, DocumentoKey.ESTAGIO_VIGENCIA_FIM, documentoVagaEstagio.getVagaEstagio().getVigenciaFim());
 			break;
 		case ESTAGIO_VALOR_TRANSPORTE:
 			replace(lenght, DocumentoKey.ESTAGIO_VALOR_TRANSPORTE, documentoVagaEstagio.getVagaEstagio().getValorTransporte());
@@ -230,9 +189,6 @@ public class DocumentoParse {
 			break;
 			
 		// Curso
-		case ALUNO_CURSO_SEMESTRE_ATUAL:
-			replace(lenght, DocumentoKey.ALUNO_CURSO_SEMESTRE_ATUAL, documentoVagaEstagio.getVagaEstagio().getAluno().getSemestreAtual().toString());
-			break;
 		case ALUNO_CURSO_NOME:
 			replace(lenght, DocumentoKey.ALUNO_CURSO_NOME, documentoVagaEstagio.getVagaEstagio().getAluno().getCurso().getNome());
 			break;

@@ -1,13 +1,9 @@
 package com.j7ss.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -15,20 +11,10 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.j7ss.core.DAO;
-import com.j7ss.core.DAOException;
-import com.j7ss.core.IGenericEntity;
-
 @Entity
 @Table(name = "departamento")
-public class Departamento implements IGenericEntity<Departamento> {
+public class Departamento extends BaseEntity<Integer> {
 
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
-	
 	private String nome;
 	
 	@ManyToOne
@@ -38,14 +24,6 @@ public class Departamento implements IGenericEntity<Departamento> {
 	@Fetch(FetchMode.JOIN)
 	private List<Curso> cursos;
 	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -70,64 +48,46 @@ public class Departamento implements IGenericEntity<Departamento> {
 		this.cursos = cursos;
 	}
 
-	//******************************************************************************************************************************
-//## Builder
-	public Departamento id(Integer id){
-		this.id = id;
-		return this;
-	}
-	
-	public Departamento nome(String nome){
-		this.nome = nome;
-		return this;
-	}
-	
-	public Departamento campus(Campus campus){
-		this.campus = campus;
-		return this;
-	}
-	
-	public Departamento addCurso(Curso curso){
-		if(cursos == null){
-			cursos = new ArrayList<>();
-		}
-		this.cursos.add(curso);
-		return this;
-	}
-	
-	public Departamento removeCurso(Curso curso){
-		if(cursos != null){
-			this.cursos.remove(curso);
-		}
-		return this;
-	}
-	
-	
-//******************************************************************************************************************************
-//## Getters Setters
 	@Override
-	public boolean isNew() {
-		return id == null;
-	}
-	
-	
-//******************************************************************************************************************************
-//## DAO
-	private static DAO<Departamento> dao = new DAO<Departamento>(Departamento.class);
-	
-	@Override
-	public Departamento save() throws DAOException{
-		return isNew() ? dao.add(this) : dao.update(this);
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((campus == null) ? 0 : campus.hashCode());
+		result = prime * result + ((cursos == null) ? 0 : cursos.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
 	}
 
 	@Override
-	public boolean remove() throws DAOException {
-		return dao.remove(this);
-	}
-	
-	public static List<Departamento> findByNomeLike(Campus campus, String nome){
-		return dao.findByQuery("SELECT i FROM Departamento i WHERE i.campus = ?1 AND lower(i.nome) like ?2" , campus, "%"+nome.toLowerCase()+"%");
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Departamento other = (Departamento) obj;
+		if (campus == null) {
+			if (other.campus != null)
+				return false;
+		} else if (!campus.equals(other.campus))
+			return false;
+		if (cursos == null) {
+			if (other.cursos != null)
+				return false;
+		} else if (!cursos.equals(other.cursos))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		return true;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "Departamento [nome=" + nome + ", campus=" + campus + ", cursos=" + cursos + "]";
+	}
+
 }

@@ -20,7 +20,7 @@ public class PerfilBean implements Serializable{
 	private LoginBean loginBean;
 	
 	public void update(){
-		try {
+		/*try {
 			if(getUsuario().isTypeAluno()){
 				getUsuario().getAluno().save();
 			}
@@ -28,7 +28,7 @@ public class PerfilBean implements Serializable{
 			Messages.showGrowlInfo("Meu Perfil", "Meu Perfil salvo com sucesso!");
 		} catch (DAOException e) {
 			Messages.showGrowlInfo("Meu Perfil", e.getMessage());
-		}
+		}*/
 	}
 	
 	

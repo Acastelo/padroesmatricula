@@ -6,14 +6,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-import org.primefaces.event.FlowEvent;
-
-import com.j7ss.core.Messages;
-import com.j7ss.core.WebContext;
-import com.j7ss.entity.Aluno;
 import com.j7ss.entity.VagaEstagio;
-import com.j7ss.entity.constraint.AlunoStatus;
-import com.j7ss.entity.constraint.Page;
 import com.j7ss.view.LoginBean;
 
 @ManagedBean
@@ -40,10 +33,10 @@ public class AlunoCompleteCadastroBean implements Serializable{
 		this.vagaEstagio = vagaEstagio;
 	}
 
-	public void concluir(){
+	/*public void concluir(){
 		try {
 			if(!loginBean.getUsuario().getAluno().getStatus().equals(AlunoStatus.VALIDO)){
-				loginBean.getUsuario().getAluno().status(AlunoStatus.VERIFICAR).save();
+				loginBean.getUsuario().getAluno().setStatus(AlunoStatus.VERIFICAR).save();
 			}
 			WebContext.redirect(Page.ALUNO_HOME);
 		} catch (Exception e) {
@@ -99,6 +92,6 @@ public class AlunoCompleteCadastroBean implements Serializable{
 			}
 			return vagaEstagio;
 		}
-	}
+	}*/
 
 }

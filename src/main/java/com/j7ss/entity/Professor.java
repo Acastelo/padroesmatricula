@@ -4,40 +4,13 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.j7ss.core.DAO;
-import com.j7ss.core.DAOException;
-import com.j7ss.core.IGenericEntity;
-
 @Entity
 @Table(name = "professor")
-public class Professor implements IGenericEntity<Professor>{
-	/**
-	 * Serial default para o objeto aluno
-	 */
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * Atributos da classe professor.
-	 * Com as anotações de get e set para cada atributo.
-	 */
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+public class Professor extends BaseEntity<Integer>{
 	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -79,45 +52,35 @@ public class Professor implements IGenericEntity<Professor>{
 	@OneToMany(mappedBy="professor", cascade=CascadeType.REMOVE)
 	private List<Curso> cursoDarAula;
 
-	/**
-	 * Métodos herdados da interface IGenericEntity.
-	 * Que zera o objeto professor
-	 */
 	@Override
-	public boolean isNew() {
-		return id == null;
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
 	}
 
-	/**
-	 * DAO
-	 * Métodos de acesso ao banco
-	 */
-	private static DAO<Professor> daoProfessor = new DAO<Professor>(Professor.class);
 	@Override
-	
-	//Método para salvar professor.
-	public Professor save() throws DAOException {
-		return isNew() ? daoProfessor.add(this) : daoProfessor.update(this);
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Professor other = (Professor) obj;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		return true;
 	}
 
-	//Método para remover professor
 	@Override
-	public boolean remove() throws DAOException {
-		return daoProfessor.remove(this);
+	public String toString() {
+		return "Professor [nome=" + nome + ", qualificação=" + qualificação + ", idade=" + idade + ", cursoDarAula="
+				+ cursoDarAula + "]";
 	}
-	
-	//Método para consulta de todos os professor
-	public List<Professor> consulta() throws DAOException{
-		List<Professor> professores = daoProfessor.findAll();
-		
-		return professores;
-	}
-	
-	//método para consulta professor por ID
-	public Professor consultaById(Integer id){
-		return daoProfessor.findOneByQuery("SELECT p FROM professor p WHERE p.id = ?1", id);
-		 
-	}
-	
 
 }

@@ -11,6 +11,8 @@ import org.primefaces.context.RequestContext;
 import com.j7ss.core.DAOException;
 import com.j7ss.core.MD5;
 import com.j7ss.core.Messages;
+import com.j7ss.dao.UsuarioDao;
+import com.j7ss.entity.Usuario;
 
 @ManagedBean
 @ViewScoped
@@ -73,16 +75,12 @@ public class MudarSenhaBean implements Serializable{
 
 
 
-	public void mudarSenha(){
+	public void mudarSenha() throws DAOException{
 		if(!senhaAtual.equals("") && MD5.md5(senhaAtual).equals(loginBean.getUsuario().getSenha())){
 			if(!novaSenha.equals("") && !confirmSenha.equals("") && novaSenha.equals(confirmSenha)){
-				try {
-					loginBean.getUsuario().senha(MD5.md5(novaSenha)).save();
-					Messages.showGrowlInfo("Mudar Senha", "Senha alterada com sucesso!");
-					RequestContext.getCurrentInstance().execute("PF('modalMudarSenha').hide();");
-				} catch (DAOException e) {
-					Messages.showGrowlErro("Mudar Senha", e.getMessage());
-				}
+				loginBean.getUsuario().getSenha(MD5.md5(novaSenha));
+				Messages.showGrowlInfo("Mudar Senha", "Senha alterada com sucesso!");
+				RequestContext.getCurrentInstance().execute("PF('modalMudarSenha').hide();");
 			}else{
 				Messages.showGrowlWarn("Mudar senha", "<strong>Nova Senha</strong> deve ser igual ao <strong>Confirme Senha</strong>");
 			}

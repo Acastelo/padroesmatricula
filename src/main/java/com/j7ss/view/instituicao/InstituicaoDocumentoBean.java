@@ -7,7 +7,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-import com.j7ss.core.BasicView;
 import com.j7ss.core.DAOException;
 import com.j7ss.core.Messages;
 import com.j7ss.core.email.EmailTemplate;
@@ -20,9 +19,9 @@ import com.j7ss.view.LoginBean;
 
 @ManagedBean
 @ViewScoped
-public class InstituicaoDocumentoBean extends BasicView<DocumentoVagaEstagio> {
+public class InstituicaoDocumentoBean {
 	
-	private static final long serialVersionUID = 1L;
+	/*private static final long serialVersionUID = 1L;
 	
 	@ManagedProperty(value="#{loginBean}")
 	private LoginBean loginBean;
@@ -95,6 +94,6 @@ public class InstituicaoDocumentoBean extends BasicView<DocumentoVagaEstagio> {
 
 	public void setDocMessage(DocumentoVagaEstagioMessage docMessage) {
 		this.docMessage = docMessage;
-	}
+	}*/
 	
 }

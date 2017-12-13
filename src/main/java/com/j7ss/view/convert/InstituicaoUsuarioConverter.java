@@ -23,7 +23,7 @@ public class InstituicaoUsuarioConverter implements Converter, Serializable {
 	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		return adminUsuarioBean.getInstituicaoByNome(value);
+		return null; //adminUsuarioBean.getInstituicaoByNome(value);
 	}
 
 	@Override

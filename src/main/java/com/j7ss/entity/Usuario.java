@@ -1,31 +1,16 @@
 package com.j7ss.entity;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.j7ss.core.DAO;
-import com.j7ss.core.DAOException;
-import com.j7ss.core.IGenericEntity;
-import com.j7ss.core.MD5;
 import com.j7ss.entity.constraint.UsuarioType;
 
 @Entity
 @Table(name = "usuario")
-public class Usuario implements IGenericEntity<Usuario>{
+public class Usuario extends BaseEntity<Integer>{
 
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
-	
 	private String nome;
 	
 	@Column(unique=true, length=80)
@@ -47,16 +32,6 @@ public class Usuario implements IGenericEntity<Usuario>{
 	@OneToOne
 	private Aluno aluno;
 	
-	
-	
-public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -121,107 +96,61 @@ public Integer getId() {
 		this.aluno = aluno;
 	}
 
-	//******************************************************************************************************************************
-//## Builder
-	public Usuario id(Integer id){
-		this.id = id;
-		return this;
-	}
-	
-	public Usuario nome(String nome){
-		this.nome = nome;
-		return this;
-	}
-	
-	public Usuario email(String email){
-		this.email = email;
-		return this;
-	}
-	
-	public Usuario senha(String senha){
-		this.senha = senha;
-		return this;
-	}
-	
-	public Usuario senhaMD5(String senha){
-		this.senha = MD5.md5(senha);
-		return this;
-	}
-	
-	public Usuario tipoUsuario(UsuarioType tipoUsuario){
-		this.tipoUsuario = tipoUsuario;
-		return this;
-	}
-	
-	public Usuario emailValido(Boolean emailValido){
-		this.emailValido = emailValido;
-		return this;
-	}
-	
-	public Usuario ativo(Boolean ativo){
-		this.ativo = ativo;
-		return this;
-	}
-	
-	public Usuario aluno(Aluno aluno){
-		this.aluno = aluno;
-		return this;
-	}
-	
-	public Usuario instituicao(Instituicao instituicao){
-		this.instituicao = instituicao;
-		return this;
-	}
-
-	
-//******************************************************************************************************************************
-//## Getters Setters
-	@Override
-	public boolean isNew() {
-		return id == null;
-	}
-	
-	public boolean isTypeAluno() {
-		return tipoUsuario.equals(UsuarioType.ALUNO);
-	}
-	
-	public boolean isTypeInstituicao() {
-		return tipoUsuario.equals(UsuarioType.INSTITUICAO);
-	}
-	
-	public boolean isTypeAdmin() {
-		return tipoUsuario.equals(UsuarioType.ADMINISTRADOR);
-	}
-	
-	public Aluno getAluno() {
-		return aluno == null ? aluno = new Aluno() : aluno;
-	}
-	
 	public Instituicao getInstituicao() {
-		return instituicao == null ? instituicao = new Instituicao() : instituicao;
+		return instituicao;
 	}
-	
-	
-//******************************************************************************************************************************
-//## DAO
-	private static DAO<Usuario> dao = new DAO<Usuario>(Usuario.class);
-	
-	@Override
-	public Usuario save() throws DAOException{
-		return isNew() ? dao.add(this) : dao.update(this);
+
+	public Aluno getAluno() {
+		return aluno;
 	}
 
 	@Override
-	public boolean remove() throws DAOException {
-		return dao.remove(this);
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((aluno == null) ? 0 : aluno.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
 	}
-	
-	public static List<Usuario> findAllMinusAluno(){
-		return dao.findByQuery("SELECT u FROM Usuario u WHERE u.tipoUsuario != ?1", UsuarioType.ALUNO);
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (aluno == null) {
+			if (other.aluno != null)
+				return false;
+		} else if (!aluno.equals(other.aluno))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		return true;
 	}
-	
-	public static List<Usuario> findByEmailAndSenha(String email, String senha){
-		return dao.findByQuery("SELECT u FROM Usuario u WHERE u.email = ?1 and u.senha = ?2", email, senha);
+
+	@Override
+	public String toString() {
+		return "Usuario [nome=" + nome + ", email=" + email + ", senha=" + senha + ", tipoUsuario=" + tipoUsuario
+				+ ", emailValido=" + emailValido + ", ativo=" + ativo + ", instituicaoFilter=" + instituicaoFilter
+				+ ", instituicao=" + instituicao + ", aluno=" + aluno + "]";
+	}
+
+	public void getSenha(String md5) {
+		getSenha();
+		
 	}
 	
 }

@@ -113,7 +113,7 @@ public class AlunoHomeBean implements Serializable{
 		this.docPage = docPage;
 	}
 
-	public void documentos(){
+	/*public void documentos(){
 		if(loginBean.getUsuario().getAluno().isStatusValido()){
 			grid = false;
 			formEstagio = false;
@@ -124,7 +124,7 @@ public class AlunoHomeBean implements Serializable{
 		}else{
 			Messages.showGrowlWarn("Atenção!!!", "Aguarde a validação do seu cadastro por parte do setor de estágios");
 		}
-	}
+	}*/
 	
 	public void documentoView(){
 		grid = false;
@@ -153,7 +153,7 @@ public class AlunoHomeBean implements Serializable{
 		documentoView = false;
 	}
 	
-	public void gridAtividade(){
+	/*public void gridAtividade(){
 		if(loginBean.getUsuario().getAluno().isStatusValido()){
 			grid = false;
 			formEstagio = false;
@@ -164,7 +164,7 @@ public class AlunoHomeBean implements Serializable{
 		}else{
 			Messages.showGrowlWarn("Atenção!!!", "Aguarde a validação do seu cadastro por parte do setor de estágios");
 		}
-	}
+	}*/
 	
 	public void grid(){
 		grid = true;
@@ -176,7 +176,7 @@ public class AlunoHomeBean implements Serializable{
 		vagaEstagio = null;
 	}
 	
-	public void setVagaEstagio(VagaEstagio vagaEstagio) {
+	/*public void setVagaEstagio(VagaEstagio vagaEstagio) {
 		this.vagaEstagio = vagaEstagio;
 		int i = 0;
 		boolean first = true;
@@ -201,9 +201,9 @@ public class AlunoHomeBean implements Serializable{
 			}
 			i++;
 		}
-	}
+	}*/
 	
-	public void save(){
+	/*public void save(){
 		try {
 			if(vagaEstagio.getAluno().getStatus().equals(AlunoStatus.INVALIDO)){
 				vagaEstagio.getAluno().status(AlunoStatus.VERIFICAR).save();
@@ -214,9 +214,9 @@ public class AlunoHomeBean implements Serializable{
 			Messages.showGrowlErro("Dados do Estágio", e.getMessage());
 		}
 		grid();
-	}
+	}*/
 	
-	public void saveAtividadeDiaria(){
+	/*public void saveAtividadeDiaria(){
 		try {
 			if(atividadeDiaria.isNew()){
 				vagaEstagio.addAtividadeDiaria(atividadeDiaria).save();
@@ -228,9 +228,9 @@ public class AlunoHomeBean implements Serializable{
 			Messages.showGrowlErro("Atividade Diária", e.getMessage());
 		}
 		gridAtividade();
-	}
+	}*/
 	
-	public void removeAtividadeDiaria(VagaEstagioAtividadeDiaria atividadeDiaria){
+	/*public void removeAtividadeDiaria(VagaEstagioAtividadeDiaria atividadeDiaria){
 		try {
 			if(atividadeDiaria.remove()){
 				vagaEstagio.getAtividadesDiaria().remove(atividadeDiaria);
@@ -240,7 +240,7 @@ public class AlunoHomeBean implements Serializable{
 			Messages.showGrowlErro("Atividade Diária", e.getMessage());
 		}
 		gridAtividade();
-	}
+	}*/
 	
 	private boolean isEqualDocCursoAndAlunoByIndex(int id){
 		if(getDocCursos() != null && getDocVagaEstagio() != null && getDocCursos().size() > id && getDocVagaEstagio().size() > id){
@@ -258,31 +258,31 @@ public class AlunoHomeBean implements Serializable{
 		return false;
 	}
 
-	public void saveDocumento(DocumentoStatus status){
+	/*public void saveDocumento(DocumentoStatus status){
 		try {
 			documentoVagaEstagio.status(status).save();
 			Messages.showGrowlInfo("Documentos", "Atualizado!");
 		} catch (DAOException e) {
 			Messages.showGrowlErro("Documentos", e.getMessage());
 		}
-	}
+	}*/
 	
-	public void submeterAvaliacao(){
+	/*public void submeterAvaliacao(){
 		try {
 			documentoVagaEstagio.status(DocumentoStatus.AGUARDANDO_VERIFICACAO).save();
 			Messages.showGrowlInfo("Documento enviado para avaliação", "Favor aguardar correção por parte da instituição.");
 		} catch (DAOException e) {
 			Messages.showGrowlErro("Documentos", e.getMessage());
 		}
-	}
+	}*/
 	
-	public boolean isDisponivel(){
+	/*public boolean isDisponivel(){
 		return documentoVagaEstagio.isStatusDisponivel() || documentoVagaEstagio.isVerificadoComErro();
-	}
+	}*/
 	
-	public boolean isDisponivelDownload(){
+	/*public boolean isDisponivelDownload(){
 		return documentoVagaEstagio.isStatusDisponivelDownload() || documentoVagaEstagio.isStatusConcluido();
-	}
+	}*/
 	
 	
 //******************************************************************************************************************************
@@ -315,9 +315,9 @@ public class AlunoHomeBean implements Serializable{
 		return loginBean.getUsuario().getAluno().getCurso().getDocumentoCursos();
 	}
 	
-	public List<VagaEstagio> getVagasEstagio() {
+	/*public List<VagaEstagio> getVagasEstagio() {
 		return vagasEstagio == null ? vagasEstagio = VagaEstagio.findByAluno(loginBean.getUsuario().getAluno()) : vagasEstagio;
-	}
+	}*/
 	
 	public VagaEstagioAtividadeDiaria getAtividadeDiaria() {
 		return atividadeDiaria == null ? atividadeDiaria = new VagaEstagioAtividadeDiaria() : atividadeDiaria;

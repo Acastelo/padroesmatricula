@@ -1,15 +1,11 @@
 package com.j7ss.entity;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
@@ -18,24 +14,13 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.j7ss.core.DAO;
-import com.j7ss.core.DAOException;
-import com.j7ss.core.IGenericEntity;
-import com.j7ss.core.util.DateUtil;
-import com.j7ss.entity.constraint.VagaEstagioAtividadeDiariaStatus;
 import com.j7ss.entity.constraint.VagaEstagioStatus;
 import com.j7ss.entity.constraint.VagaEstagioTurno;
 import com.j7ss.entity.constraint.VagaEstagioType;
 
 @Entity
 @Table(name = "vaga_estagio")
-public class VagaEstagio implements IGenericEntity<VagaEstagio>{
-	
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
+public class VagaEstagio extends BaseEntity<Integer>{
 	
 	private String nome;
 	
@@ -98,15 +83,6 @@ public class VagaEstagio implements IGenericEntity<VagaEstagio>{
 	@OrderBy("ordem")
 	private List<DocumentoVagaEstagio> documentosVagaEstagio;
 	
-	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -305,224 +281,66 @@ public class VagaEstagio implements IGenericEntity<VagaEstagio>{
 		this.nome = nome;
 	}
 
-	
-//******************************************************************************************************************************
-//## Builder
-	public VagaEstagio idVaga(Integer id){
-		this.id = id;
-		return this;
-	}
-	
-	public VagaEstagio nome(String nome){
-		this.nome = nome;
-		return this;
-	}
-	
-	public VagaEstagio descricao(String descricao){
-		this.descricao = descricao;
-		return this;
-	}
-	
-	public VagaEstagio requisitos(String requisitos){
-		this.requisitos = requisitos;
-		return this;
-	}
-	
-	public VagaEstagio atividades(String atividades){
-		this.atividades = atividades;
-		return this;
-	}
-	
-	public VagaEstagio beneficios(String beneficios){
-		this.beneficios = beneficios;
-		return this;
-	}
-	
-	public VagaEstagio cargaHoraria(Integer cargaHoraria){
-		this.cargaHoraria = cargaHoraria;
-		return this;
-	}
-	
-	public VagaEstagio remuneracao(Double remuneracao){
-		this.remuneracao = remuneracao;
-		return this;
-	}
-	
-	public VagaEstagio turno(VagaEstagioTurno turno){
-		this.turno = turno;
-		return this;
-	}
-	
-	public VagaEstagio horaInicioEstagio(Date horaInicioEstagio){
-		this.horaInicioEstagio = horaInicioEstagio;
-		return this;
-	}
-	
-	public VagaEstagio horaFimOuIntervalo(Date horaFimOuIntervalo){
-		this.horaFimOuIntervalo = horaFimOuIntervalo;
-		return this;
-	}
-	
-	public VagaEstagio horaRetorno(Date horaRetorno){
-		this.horaRetorno = horaRetorno;
-		return this;
-	}
-	
-	public VagaEstagio horaFimEstagio(Date horaFimEstagio){
-		this.horaFimEstagio = horaFimEstagio;
-		return this;
-	}
-	
-	public VagaEstagio vigenciaInicio(Date vigenciaInicio){
-		this.vigenciaInicio = vigenciaInicio;
-		return this;
-	}
-	
-	public VagaEstagio vigenciaFim(Date vigenciaFim){
-		this.vigenciaFim = vigenciaFim;
-		return this;
-	}
-	
-	public VagaEstagio valorTransporte(Double valorTransporte){
-		this.valorTransporte = valorTransporte;
-		return this;
-	}
-	
-	public VagaEstagio apoliceNumero(String apoliceNumero){
-		this.apoliceNumero = apoliceNumero;
-		return this;
-	}
-	
-	public VagaEstagio apoliceEmpresa(String apoliceEmpresa){
-		this.apoliceEmpresa = apoliceEmpresa;
-		return this;
-	}
-	
-	public VagaEstagio aluno(Aluno aluno){
-		this.aluno = aluno;
-		return this;
-	}
-	
-	public VagaEstagio empresa(Empresa empresa){
-		this.empresa = empresa;
-		return this;
-	}
-	
-	public VagaEstagio empresaSupervisor(EmpresaSupervisor empresaSupervisor){
-		this.empresaSupervisor = empresaSupervisor;
-		return this;
-	}
-
-	public VagaEstagio addDocumento(DocumentoVagaEstagio docAluno) throws DAOException{
-		this.getDocumentosVagaEstagio().add(docAluno.vagaEstagio(this).save());
-		return this;
-	}
-	
-	public VagaEstagio addAtividadeDiaria(VagaEstagioAtividadeDiaria atividadeDiaria) throws DAOException{
-		this.getAtividadesDiaria().add(atividadeDiaria.vagaEstagio(this).save());
-		return this;
-	}
-	
-//******************************************************************************************************************************
-//## Getters Setters
-	@Override
-	public boolean isNew() {
-		return id == null;
-	}
-	
 	public Empresa getEmpresa() {
-		return empresa == null ? empresa  = new Empresa() : empresa;
+		return empresa;
 	}
-	
+
 	public EmpresaSupervisor getEmpresaSupervisor() {
-		return empresaSupervisor == null ? empresaSupervisor = new EmpresaSupervisor() : empresaSupervisor;
+		return empresaSupervisor;
 	}
-	
-	public List<Documento> getDocumentos(){
-		List<Documento> documentos = new ArrayList<>();
-		for (DocumentoVagaEstagio docA : documentosVagaEstagio) {
-			documentos.add(docA.getDocumento());
-		}
-		return documentos;
-	}
-	
-	public Integer getHorasConcluidas(){
-		int value = 0;
-		for (VagaEstagioAtividadeDiaria atividade : getAtividadesDiaria()) {
-			if(atividade.getStatus().equals(VagaEstagioAtividadeDiariaStatus.OK)){
-				value = value + atividade.getQuantidadeHoras();
-			}
-		}
-		return value;
-	}
-	
-	public Integer getDuracaoEstagio(){
-		return getAluno().getCurso().getDuracaoEstagio();
-	}
-	
-	public List<DocumentoVagaEstagio> getDocumentosVagaEstagio() {
-		return documentosVagaEstagio; // == null && !isNew() ? documentosVagaEstagio = DocumentoVagaEstagio.findByVagaEstagio(this) : documentosVagaEstagio;
-	}
-	
+
 	public List<VagaEstagioAtividadeDiaria> getAtividadesDiaria() {
-		return atividadesDiaria;  //== null && !isNew() ? atividadesDiaria = VagaEstagioAtividadeDiaria.findByVagaEstagio(this) : atividadesDiaria;
+		return atividadesDiaria;
 	}
-	
-	public String getVigenciaInicioFormat(){
-		return DateUtil.format(vigenciaInicio);
-	}
-	
-	public String getVigenciaFimFormat(){
-		return DateUtil.format(vigenciaFim);
-	}
-	
-	public String getHoraInicioEstagioFormat(){
-		if(horaInicioEstagio != null){
-			return DateUtil.getHora(horaInicioEstagio);
-		}
-		return "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-	}
-	
-	public String getHoraFimOuIntervaloFormat(){
-		if(horaFimOuIntervalo != null){
-			return DateUtil.getHora(horaFimOuIntervalo);
-		}
-		return "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-	}
-	
-	public String getHoraRetornoFormat(){
-		if(horaRetorno != null){
-			return DateUtil.getHora(horaRetorno);
-		}
-		return "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-	}
-	
-	public String getHoraFimEstagioFormat(){
-		if(horaFimEstagio != null){
-			return DateUtil.getHora(horaFimEstagio);
-		}
-		return "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-	}
-	
-//******************************************************************************************************************************
-//## DAO
-	private static DAO<VagaEstagio> dao = new DAO<VagaEstagio>(VagaEstagio.class);
-	
-	@Override
-	public VagaEstagio save() throws DAOException{
-		return isNew() ? dao.add(this) : dao.update(this);
+
+	public List<DocumentoVagaEstagio> getDocumentosVagaEstagio() {
+		return documentosVagaEstagio;
 	}
 
 	@Override
-	public boolean remove() throws DAOException {
-		return dao.remove(this);
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((aluno == null) ? 0 : aluno.hashCode());
+		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
+		return result;
 	}
-	
-	public static List<VagaEstagio> findAll(){
-		return dao.findAll();
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		VagaEstagio other = (VagaEstagio) obj;
+		if (aluno == null) {
+			if (other.aluno != null)
+				return false;
+		} else if (!aluno.equals(other.aluno))
+			return false;
+		if (empresa == null) {
+			if (other.empresa != null)
+				return false;
+		} else if (!empresa.equals(other.empresa))
+			return false;
+		return true;
 	}
-	
-	public static List<VagaEstagio> findByAluno(Aluno aluno){
-		return dao.findByQuery("Select v From VagaEstagio v Where v.aluno = ?1", aluno);
+
+	@Override
+	public String toString() {
+		return "VagaEstagio [nome=" + nome + ", descricao=" + descricao + ", requisitos=" + requisitos + ", atividades="
+				+ atividades + ", resultados=" + resultados + ", setor=" + setor + ", beneficios=" + beneficios
+				+ ", cargaHoraria=" + cargaHoraria + ", remuneracao=" + remuneracao + ", turno=" + turno
+				+ ", horaInicioEstagio=" + horaInicioEstagio + ", horaFimOuIntervalo=" + horaFimOuIntervalo
+				+ ", horaRetorno=" + horaRetorno + ", horaFimEstagio=" + horaFimEstagio + ", vigenciaInicio="
+				+ vigenciaInicio + ", vigenciaFim=" + vigenciaFim + ", valorTransporte=" + valorTransporte
+				+ ", apoliceNumero=" + apoliceNumero + ", apoliceEmpresa=" + apoliceEmpresa + ", status=" + status
+				+ ", type=" + type + ", aluno=" + aluno + ", empresa=" + empresa + ", empresaSupervisor="
+				+ empresaSupervisor + ", atividadesDiaria=" + atividadesDiaria + ", documentosVagaEstagio="
+				+ documentosVagaEstagio + "]";
 	}
+
+		
 }

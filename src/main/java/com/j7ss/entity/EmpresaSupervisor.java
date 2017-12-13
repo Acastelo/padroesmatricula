@@ -4,25 +4,13 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.j7ss.core.DAO;
-import com.j7ss.core.DAOException;
-import com.j7ss.core.IGenericEntity;
-
 @Entity
 @Table(name = "empresa_supervisor")
-public class EmpresaSupervisor implements IGenericEntity<EmpresaSupervisor> {
-	private static final long serialVersionUID = 1L;
-		
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
+public class EmpresaSupervisor extends BaseEntity<Integer> {
 	
 	private String supervisor;
 	
@@ -37,14 +25,6 @@ public class EmpresaSupervisor implements IGenericEntity<EmpresaSupervisor> {
 	@OneToMany(mappedBy="empresaSupervisor")
 	private List<VagaEstagio> vagaEstagios;
 	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public String getSupervisor() {
 		return supervisor;
 	}
@@ -85,56 +65,42 @@ public class EmpresaSupervisor implements IGenericEntity<EmpresaSupervisor> {
 		this.vagaEstagios = vagaEstagios;
 	}
 
-	//******************************************************************************************************************************	
-//## Builder
-	public EmpresaSupervisor id(Integer id){
-		this.id = id;
-		return this;
-	}
-	
-	public EmpresaSupervisor supervisor(String supervisor){
-		this.supervisor = supervisor;
-		return this;
-	}
-	
-	public EmpresaSupervisor cargoSupervisor(String cargoSupervisor){
-		this.cargoSupervisor = cargoSupervisor;
-		return this;
-	}
-	
-	public EmpresaSupervisor telefoneSupervisor(String telefoneSupervisor){
-		this.telefoneSupervisor = telefoneSupervisor;
-		return this;
-	}
-	
-	public EmpresaSupervisor empresa(Empresa empresa){
-		this.empresa = empresa;
-		return this;
-	}
-
-//******************************************************************************************************************************
-//## Getters Setters
 	@Override
-	public boolean isNew() {
-		return id == null;
-	}
-	
-	
-//******************************************************************************************************************************
-//## DAO
-	private static DAO<EmpresaSupervisor> dao = new DAO<EmpresaSupervisor>(EmpresaSupervisor.class);
-	
-	@Override
-	public EmpresaSupervisor save() throws DAOException{
-		return isNew() ? dao.add(this) : dao.update(this);
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
+		result = prime * result + ((supervisor == null) ? 0 : supervisor.hashCode());
+		return result;
 	}
 
 	@Override
-	public boolean remove() throws DAOException {
-		return dao.remove(this);
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EmpresaSupervisor other = (EmpresaSupervisor) obj;
+		if (empresa == null) {
+			if (other.empresa != null)
+				return false;
+		} else if (!empresa.equals(other.empresa))
+			return false;
+		if (supervisor == null) {
+			if (other.supervisor != null)
+				return false;
+		} else if (!supervisor.equals(other.supervisor))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "EmpresaSupervisor [supervisor=" + supervisor + ", cargoSupervisor=" + cargoSupervisor
+				+ ", telefoneSupervisor=" + telefoneSupervisor + ", empresa=" + empresa + ", vagaEstagios="
+				+ vagaEstagios + "]";
 	}
 	
-	public static List<EmpresaSupervisor> findAll(){
-		return dao.findAll();
-	}
 }

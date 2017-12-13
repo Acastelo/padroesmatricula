@@ -9,17 +9,12 @@ import javax.persistence.Table;
 
 import com.j7ss.core.DAO;
 import com.j7ss.core.DAOException;
-import com.j7ss.core.IGenericEntity;
 
 @Entity
 @Table(name = "documento_curso")
-public class DocumentoCurso implements IGenericEntity<DocumentoCurso> {
+public class DocumentoCurso extends BaseEntity<Integer> {
 
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
 	
 	private Integer ordem;
 
@@ -29,14 +24,6 @@ public class DocumentoCurso implements IGenericEntity<DocumentoCurso> {
 	@ManyToOne
 	private Documento documento = new Documento();
 	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public Integer getOrdem() {
 		return ordem;
 	}
@@ -66,50 +53,47 @@ public class DocumentoCurso implements IGenericEntity<DocumentoCurso> {
 	public DocumentoCurso(Curso curso) {
 		this.curso = curso;
 	}
-
-	
-//******************************************************************************************************************************
-//## Builder
-	public DocumentoCurso id(Integer id){
-		this.id = id;
-		return this;
-	}
-	
-	public DocumentoCurso ordem(Integer ordem){
-		this.ordem = ordem;
-		return this;
-	}
-	
-	public DocumentoCurso curso(Curso curso){
-		this.curso = curso;
-		return this;
-	}
-	
-	public DocumentoCurso documento(Documento documento){
-		this.documento = documento;
-		return this;
-	}
-	
-//******************************************************************************************************************************
-//## Getters Setters
-	@Override
-	public boolean isNew() {
-		return id == null;
-	}
-	
-
-//******************************************************************************************************************************
-//## DAO
-	private static DAO<DocumentoCurso> dao = new DAO<DocumentoCurso>(DocumentoCurso.class);
 	
 	@Override
-	public DocumentoCurso save() throws DAOException{
-		return isNew() ? dao.add(this) : dao.update(this);
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((curso == null) ? 0 : curso.hashCode());
+		result = prime * result + ((documento == null) ? 0 : documento.hashCode());
+		result = prime * result + ((ordem == null) ? 0 : ordem.hashCode());
+		return result;
 	}
 
 	@Override
-	public boolean remove() throws DAOException {
-		return dao.remove(this);
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DocumentoCurso other = (DocumentoCurso) obj;
+		if (curso == null) {
+			if (other.curso != null)
+				return false;
+		} else if (!curso.equals(other.curso))
+			return false;
+		if (documento == null) {
+			if (other.documento != null)
+				return false;
+		} else if (!documento.equals(other.documento))
+			return false;
+		if (ordem == null) {
+			if (other.ordem != null)
+				return false;
+		} else if (!ordem.equals(other.ordem))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "DocumentoCurso [ordem=" + ordem + ", curso=" + curso + ", documento=" + documento + "]";
 	}
 	
 }

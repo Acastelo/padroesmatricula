@@ -4,12 +4,11 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import com.j7ss.core.BasicView;
 import com.j7ss.entity.DocumentoVagaEstagio;
 
 @ManagedBean
 @ViewScoped
-public class InstituicaoHomeBean extends BasicView<DocumentoVagaEstagio> {
+public class InstituicaoHomeBean {
 	
 	private static final long serialVersionUID = 1L;
 	

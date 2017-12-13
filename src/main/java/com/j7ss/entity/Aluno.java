@@ -1,15 +1,11 @@
 package com.j7ss.entity;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -18,60 +14,22 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.j7ss.core.DAO;
-import com.j7ss.core.DAOException;
-import com.j7ss.core.IGenericEntity;
-import com.j7ss.core.util.DateUtil;
 import com.j7ss.entity.constraint.AlunoStatus;
 
 @Entity
 @Table(name = "aluno")
-public class Aluno implements IGenericEntity<Aluno>{
+public class Aluno extends BaseEntity<Integer>{
 
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
-	
 	@Column(length=20) 
 	private String matricula;
 	
 	@Column(length=20)
 	private String telefone;
 	
-	@Column(length=20)
-	private String celular;
-	
-	@Column(length=100)
-	private String cvLattes;
-	
-	private Integer semestreAtual;
-	
 	@Column(length=15)
 	private String cpf;
 	
-	@Column(length=25)
-	private String rg;
-	
 	private Date dataNascimento;
-	
-	private String endereco;
-	
-	@Column(length=10)
-	private String numero;
-	
-	private String complemento;
-	
-	private String bairro;
-	
-	@Column(length=10)
-	private String cep;
-	
-	private String cidade;
-	
-	@Column(length=2)
-	private String uf;
 	
 	private AlunoStatus status = AlunoStatus.NOVO;
 	
@@ -86,14 +44,6 @@ public class Aluno implements IGenericEntity<Aluno>{
 	private List<VagaEstagio> vagasEstagio;
 
 	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public String getMatricula() {
 		return matricula;
 	}
@@ -110,44 +60,12 @@ public class Aluno implements IGenericEntity<Aluno>{
 		this.telefone = telefone;
 	}
 
-	public String getCelular() {
-		return celular;
-	}
-
-	public void setCelular(String celular) {
-		this.celular = celular;
-	}
-
-	public String getCvLattes() {
-		return cvLattes;
-	}
-
-	public void setCvLattes(String cvLattes) {
-		this.cvLattes = cvLattes;
-	}
-
-	public Integer getSemestreAtual() {
-		return semestreAtual;
-	}
-
-	public void setSemestreAtual(Integer semestreAtual) {
-		this.semestreAtual = semestreAtual;
-	}
-
 	public String getCpf() {
 		return cpf;
 	}
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
-	}
-
-	public String getRg() {
-		return rg;
-	}
-
-	public void setRg(String rg) {
-		this.rg = rg;
 	}
 
 	public Date getDataNascimento() {
@@ -158,61 +76,6 @@ public class Aluno implements IGenericEntity<Aluno>{
 		this.dataNascimento = dataNascimento;
 	}
 
-	public String getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
-
-	public String getNumero() {
-		return numero;
-	}
-
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
-	public String getComplemento() {
-		return complemento;
-	}
-
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
-
-	public String getBairro() {
-		return bairro;
-	}
-
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
-
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-
-	public String getUf() {
-		return uf;
-	}
-
-	public void setUf(String uf) {
-		this.uf = uf;
-	}
 
 	public AlunoStatus getStatus() {
 		return status;
@@ -225,296 +88,59 @@ public class Aluno implements IGenericEntity<Aluno>{
 	public void setCurso(Curso curso) {
 		this.curso = curso;
 	}
-
+	
+	public Curso getCurso() {
+		return curso;
+	}
+	
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+	
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
 	public void setVagasEstagio(List<VagaEstagio> vagasEstagio) {
 		this.vagasEstagio = vagasEstagio;
 	}
 
-	//******************************************************************************************************************************	
-//## Builder
-	public Aluno id(Integer id){
-		this.id = id;
-		return this;
-	}
-	
-	public Aluno matricula(String matricula){
-		this.matricula = matricula;
-		return this;
-	}
-	
-	public Aluno telefone(String telefone){
-		this.telefone = telefone;
-		return this;
-	}
-	
-	public Aluno cvLattes(String cvLattes){
-		this.cvLattes = cvLattes;
-		return this;
-	}
-	
-	public Aluno semestreAtual(Integer semestreAtual){
-		this.semestreAtual = semestreAtual;
-		return this;
-	}
-	
-	public Aluno cpf(String cpf){
-		this.cpf = cpf;
-		return this;
-	}
-	
-	public Aluno rg(String rg){
-		this.rg = rg;
-		return this;
-	}
-	
-	public Aluno dataNascimento(Date dataNascimento){
-		this.dataNascimento = dataNascimento;
-		return this;
-	}
-	
-	public Aluno endereco(String endereco){
-		this.endereco = endereco;
-		return this;
-	}
-	
-	public Aluno bairro(String bairro){
-		this.bairro = bairro;
-		return this;
-	}
-	
-	public Aluno cep(String cep){
-		this.cep = cep;
-		return this;
-	}
-	
-	public Aluno cidade(String cidade){
-		this.cidade = cidade;
-		return this;
-	}
-	
-	public Aluno uf(String uf){
-		this.uf = uf;
-		return this;
-	}
-	
-	public Aluno vagaEstagio(List<VagaEstagio> vagasEstagio){
-		this.vagasEstagio = vagasEstagio;
-		return this;
-	}
-	
-	public Aluno curso(Curso curso){
-		this.curso = curso;
-		return this;
-	}
-	
-	public Aluno usuario(Usuario usuario){
-		this.usuario = usuario;
-		return this;
-	}
-	
-	public Aluno addVagaEstagio(VagaEstagio vagaEstagio) throws DAOException{
-		getVagasEstagio().add(vagaEstagio.aluno(this).save());
-		return save();
-	}
-	
-	public Aluno status(AlunoStatus status){
-		this.status = status;
-		return this;
-	}
-	
-	
-//******************************************************************************************************************************
-//## Getters Setters
 	@Override
-	public boolean isNew() {
-		return id == null;
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		result = prime * result + ((matricula == null) ? 0 : matricula.hashCode());
+		return result;
 	}
-	
-	public boolean isStatusValido() {
-		return status.equals(AlunoStatus.VALIDO);
-	}
-	
-	public boolean isStatusInvalido(){
-		return status.equals(AlunoStatus.INVALIDO);
-	}
-	
-	public boolean isWizardAlunoInfo(){
-		return (
-				semestreAtual != null 	&& !semestreAtual.equals("") &&
-				telefone != null 		&& !telefone.equals("") &&
-				celular != null 		&& !celular.equals("") &&
-				cpf != null				&& !cpf.equals("") &&
-				rg != null 				&& !rg.equals("") &&
-				dataNascimento != null 	&& !dataNascimento.equals("")
-			);
-	}
-	
-	public boolean isWizardAlunoEndereco(){
-		return (
-				endereco != null 		&& !endereco.equals("") &&
-				numero != null 			&& !numero.equals("") &&
-				bairro != null 			&& !bairro.equals("") &&
-				cep != null 			&& !cep.equals("") &&
-				cidade != null 			&& !cidade.equals("") &&
-				uf != null 				&& !uf.equals("") 
-			);
-	}
-	
-	public boolean isWizardVagaEstagio(){
-		if(getVagasEstagio().size() == 0){
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
 			return false;
-		}
-		VagaEstagio vaga = getVagasEstagio().get(0);
-		return (
-				vaga.getTurno() != null 			&& !vaga.getTurno().equals("") &&
-				vaga.getRemuneracao() != null 		&& !vaga.getRemuneracao().equals("") &&
-				vaga.getValorTransporte() != null 	&& !vaga.getValorTransporte().equals("") &&
-				vaga.getCargaHoraria() != null 		&& !vaga.getCargaHoraria().equals("") &&
-				vaga.getVigenciaInicio() != null 	&& !vaga.getVigenciaInicio().equals("") &&
-				vaga.getVigenciaFim() != null 		&& !vaga.getVigenciaFim().equals("") &&
-				vaga.getHoraInicioEstagio() != null && !vaga.getHoraInicioEstagio().equals("") &&
-				vaga.getHoraFimEstagio() != null 	&& !vaga.getHoraFimEstagio().equals("")
-			);
-	}
-	
-	public boolean isWizardVagaEstagioConcluir(){
-		if(getVagasEstagio().size() == 0) return false;
-		VagaEstagio vaga = getVagasEstagio().get(0);
-		return (
-				vaga.getAtividades() != null 	    && !vaga.getAtividades().equals("") &&
-				vaga.getResultados() != null 	    && !vaga.getResultados().equals("") &&
-				vaga.getSetor() != null 	        && !vaga.getSetor().equals("") &&
-				vaga.getApoliceNumero() != null 	&& !vaga.getApoliceNumero().equals("") &&
-				vaga.getApoliceEmpresa() != null 	&& !vaga.getApoliceEmpresa().equals("") 
-			);
-	}
-	
-	public boolean isWizardVagaEstagioEmpresa(){
-		if(getVagasEstagio().size() == 0) return false;
-		if(getVagasEstagio().get(0).getEmpresa().isNew()) return false;
-		Empresa empresa = getVagasEstagio().get(0).getEmpresa();
-		return (
-			empresa.getNome() != null 			&& !empresa.getNome().equals("") &&
-			empresa.getEmail() != null 			&& !empresa.getEmail().equals("") &&
-			empresa.getTelefone() != null		&& !empresa.getTelefone().equals("") &&
-			empresa.getFax() != null 			&& !empresa.getFax().equals("") &&
-			empresa.getCnpj() != null 			&& !empresa.getCnpj().equals("") &&
-			empresa.getSite() != null 			&& !empresa.getSite().equals("") &&
-			empresa.getRamoAtividade() != null 	&& !empresa.getRamoAtividade().equals("") &&
-			empresa.getEndereco() != null 		&& !empresa.getEndereco().equals("") &&
-			empresa.getNumero() != null 		&& !empresa.getNumero().equals("") &&
-			empresa.getBairro() != null 		&& !empresa.getBairro().equals("") &&
-			empresa.getCep() != null 			&& !empresa.getCep().equals("") &&
-			empresa.getUf() != null 			&& !empresa.getUf().equals("") &&
-			empresa.getCidade() != null 		&& !empresa.getCidade().equals("")
-		);
-	}
-	
-	public boolean isWizardVagaEstagioEmpresaSupervisor(){
-		if(getVagasEstagio().size() == 0) return false;
-		if(getVagasEstagio().get(0).getEmpresaSupervisor().isNew()) return false;
-		EmpresaSupervisor empSupervisor = getVagasEstagio().get(0).getEmpresaSupervisor();
-		return (
-			empSupervisor.getSupervisor() != null 		&& !empSupervisor.getSupervisor().equals("") &&
-			empSupervisor.getCargoSupervisor() != null 	&& !empSupervisor.getCargoSupervisor().equals("") &&
-			empSupervisor.getTelefoneSupervisor()!=null && !empSupervisor.getTelefoneSupervisor().equals("")
-		);
-	}
-	
-	
-	public String getWizardStep(){
-		if(!isWizardAlunoInfo()){
-			return "aluno";
-		}else if(!isWizardAlunoEndereco()){
-			return "endereco";
-		}else if(!isWizardVagaEstagio()){
-			return "vagaEstagio";
-		}else if(!isWizardVagaEstagioConcluir()){
-			return "vagaEstagioConcluir";
-		}else if(!isWizardVagaEstagioEmpresa()){
-			return "empresa";
-		}else if(!isWizardVagaEstagioEmpresaSupervisor()){
-			return "empresaSupervisor";
-		}
-		return null;
-	}
-	
-	public boolean isWizardCompleted(){
-		return getWizardStep() == null;
-	}
-	
-	public String getDescricaoCurso(){
-		String cursoName = "";
-		String departamentoName = "";
-		String campusName = "";
-		String instituicaoName = "";
-		if(curso != null){
-			cursoName = curso.getNome();
-			if(curso.getDepartamento() != null){
-				departamentoName = curso.getDepartamento().getNome();
-				if(curso.getDepartamento().getCampus() != null){
-					campusName = curso.getDepartamento().getCampus().getNome();
-					if(curso.getDepartamento().getCampus().getInstituicao() != null){
-						instituicaoName = curso.getDepartamento().getCampus().getInstituicao().getNome();
-					}
-				}
-			}
-		}
-		return String.format("%s <br/> Departamento de  %s <br/> Campus %s <br/> %s", cursoName, departamentoName, campusName, instituicaoName);
-	}
-	
-	public Curso getCurso() {
-		return curso == null ? curso = new Curso() : curso;
-	}
-	
-	public Usuario getUsuario() {
-		return usuario == null ? usuario = new Usuario() : usuario;
-	}
-	
-	public List<VagaEstagio> getVagasEstagio() {
-		return vagasEstagio == null ? vagasEstagio = new ArrayList<>() : vagasEstagio;
-	}
-	
-	public String getDataNascimentoFormat(){
-		return DateUtil.format(dataNascimento);
-	}
-	
-//	public String getComplemento() {
-//		return complemento == null ? "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" : complemento;
-//	}
-
-	
-//******************************************************************************************************************************
-//## DAO
-	private static DAO<Aluno> dao = new DAO<Aluno>(Aluno.class);
-	
-	@Override
-	public Aluno save() throws DAOException{
-		return isNew() ? dao.add(this) : dao.update(this);
+		if (getClass() != obj.getClass())
+			return false;
+		Aluno other = (Aluno) obj;
+		if (cpf == null) {
+			if (other.cpf != null)
+				return false;
+		} else if (!cpf.equals(other.cpf))
+			return false;
+		if (matricula == null) {
+			if (other.matricula != null)
+				return false;
+		} else if (!matricula.equals(other.matricula))
+			return false;
+		return true;
 	}
 
 	@Override
-	public boolean remove() throws DAOException {
-		return dao.remove(this);
+	public String toString() {
+		return "Aluno [matricula=" + matricula + ", telefone=" + telefone + ", cpf=" + cpf
+				+ ", dataNascimento=" + dataNascimento + ", status=" + status + ", curso=" + curso + ", usuario="
+				+ usuario + ", vagasEstagio=" + vagasEstagio + "]";
 	}
 	
-	public static List<Aluno> findAll(){
-		return dao.findByQuery("SELECT a FROM Aluno a LEFT JOIN FETCH a.vagasEstagio ve "); 
-	}
-	
-	public static List<Aluno> findByInstituicaoNotStatus(Instituicao instituicao, AlunoStatus status){
-		return dao.findByQuery("SELECT a FROM Aluno a JOIN a.curso c JOIN c.departamento d JOIN d.campus c WHERE c.instituicao = ?1 AND a.status != ?2 ", instituicao, status); 
-	}
-	
-	public static Aluno findByUsuario(Usuario usuario){
-		return dao.findOneByQuery("SELECT a FROM Aluno a WHERE a.usuario = ?1" , usuario);
-	}
-	
-	public static List<Aluno> findByNotStatus(AlunoStatus status){
-		return dao.findByQuery("Select a From Aluno a WHERE a.status != ?1", status);
-	}
 }

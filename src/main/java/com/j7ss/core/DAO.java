@@ -4,13 +4,12 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import com.j7ss.core.util.JPAUtil;
+import com.j7ss.dao.GenericDao;
 
-public class DAO<T extends IGenericEntity<T>>{
+public class DAO<T extends GenericDao<T>>{
 
 	private final Class<T> clazz;
 	

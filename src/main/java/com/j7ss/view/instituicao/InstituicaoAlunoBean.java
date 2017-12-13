@@ -7,7 +7,6 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 
-import com.j7ss.core.BasicView;
 import com.j7ss.core.DAOException;
 import com.j7ss.core.Messages;
 import com.j7ss.core.email.EmailTemplate;
@@ -18,8 +17,8 @@ import com.j7ss.view.LoginBean;
 
 @ManagedBean
 @ViewScoped
-public class InstituicaoAlunoBean extends BasicView<Aluno>{
-	private static final long serialVersionUID = 1L;
+public class InstituicaoAlunoBean {
+/*	private static final long serialVersionUID = 1L;
 	
 	@ManagedProperty(value="#{loginBean}")
 	private LoginBean loginBean;
@@ -82,5 +81,5 @@ public class InstituicaoAlunoBean extends BasicView<Aluno>{
 	@Override
 	public List<Aluno> getEntitys() {
 		return entitys == null ? entitys = Aluno.findByInstituicaoNotStatus(loginBean.getUsuario().getInstituicao(), AlunoStatus.NOVO) : entitys;
-	}
+	}*/
 }

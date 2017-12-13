@@ -10,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 import com.j7ss.core.MD5;
 import com.j7ss.core.Messages;
 import com.j7ss.core.WebContext;
+import com.j7ss.dao.UsuarioDao;
 import com.j7ss.entity.Usuario;
 import com.j7ss.entity.constraint.Page;
 
@@ -20,9 +21,10 @@ public class LoginBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Usuario usuario;
+	private UsuarioDao usuarioDao;
 
 	public void login(){	
-		try {
+		/*try {
 			List<Usuario> usuarios = Usuario.findByEmailAndSenha(usuario.getEmail(), MD5.md5(usuario.getSenha()));
 			if(usuarios != null && usuarios.size() > 0 ){
 				usuario = usuarios.get(0);
@@ -33,7 +35,7 @@ public class LoginBean implements Serializable{
 			}
 		} catch (Exception e) {
 			Messages.showGrowlErro("Erro ao fazer Login.", e.getMessage());
-		}
+		}*/
 	}
 	
 	public void logoff(){
@@ -55,7 +57,7 @@ public class LoginBean implements Serializable{
 	}
 	
 	public String getHomeLink(){
-		String homePage = "";
+		/*String homePage = "";
 		if(usuario.isTypeAluno()){
 			homePage = usuario.getAluno().isWizardCompleted() ? Page.ALUNO_HOME : Page.ALUNO_COMPLETE_CADASTRO;
 		}else if(usuario.isTypeInstituicao()){
@@ -63,7 +65,8 @@ public class LoginBean implements Serializable{
 		}else if(usuario.isTypeAdmin()){
 			homePage = Page.ADMIN_HOME;
 		}
-		return homePage;
+		return homePage;*/
+		return "";
 	}
 	
 //******************************************************************************************************************************

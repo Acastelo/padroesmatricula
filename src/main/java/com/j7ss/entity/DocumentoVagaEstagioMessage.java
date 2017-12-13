@@ -4,27 +4,15 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.j7ss.core.DAO;
-import com.j7ss.core.DAOException;
-import com.j7ss.core.IGenericEntity;
 import com.j7ss.entity.constraint.DocumentoStatus;
 
 @Entity
 @Table(name = "documento_vaga_estagio_message")
-public class DocumentoVagaEstagioMessage implements IGenericEntity<DocumentoVagaEstagioMessage> {
+public class DocumentoVagaEstagioMessage extends BaseEntity<Integer> {
 
-	private static final long serialVersionUID = 1L;
-		
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
-	
 	@Column(columnDefinition="text")
 	private String message;
 	
@@ -37,14 +25,6 @@ public class DocumentoVagaEstagioMessage implements IGenericEntity<DocumentoVaga
 	
 	@ManyToOne
 	private DocumentoVagaEstagio documentoVagaEstagio;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getMessage() {
 		return message;
@@ -82,63 +62,46 @@ public class DocumentoVagaEstagioMessage implements IGenericEntity<DocumentoVaga
 		this.documentoVagaEstagio = documentoVagaEstagio;
 	}
 
-	//******************************************************************************************************************************		
-//## Builder
-	public DocumentoVagaEstagioMessage id(Integer id){
-		this.id = id;
-		return this;
-	}
-	
-	public DocumentoVagaEstagioMessage message(String message){
-		this.message = message;
-		return this;
-	}
-	
-	public DocumentoVagaEstagioMessage date(Date date){
-		this.date = date;
-		return this;
-	}
-	
-	public DocumentoVagaEstagioMessage documentoVagaEstagio(DocumentoVagaEstagio documentoVagaEstagio){
-		this.documentoVagaEstagio = documentoVagaEstagio;
-		return this;
-	}
-	
-	public DocumentoVagaEstagioMessage usuario(Usuario usuario){
-		this.usuario = usuario;
-		return this;
-	}
-	
-	public DocumentoVagaEstagioMessage status(DocumentoStatus status){
-		this.status = status;
-		return this;
-	}
-	
-	
-//******************************************************************************************************************************
-//## Getters Setters
-	@Override
-	public boolean isNew() {
-		return id == null;
-	}
-	
 	public DocumentoVagaEstagio getDocumentoVagaEstagio() {
-		return documentoVagaEstagio == null ? documentoVagaEstagio = new DocumentoVagaEstagio() : documentoVagaEstagio;
-	}
-	
-
-//******************************************************************************************************************************		
-//## DAO
-	private static DAO<DocumentoVagaEstagioMessage> dao = new DAO<DocumentoVagaEstagioMessage>(DocumentoVagaEstagioMessage.class);
-	
-	@Override
-	public DocumentoVagaEstagioMessage save() throws DAOException{
-		return isNew() ? dao.add(this) : dao.update(this);
+		return documentoVagaEstagio;
 	}
 
 	@Override
-	public boolean remove() throws DAOException {
-		return dao.remove(this);
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
+		return result;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DocumentoVagaEstagioMessage other = (DocumentoVagaEstagioMessage) obj;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
+			return false;
+		if (usuario == null) {
+			if (other.usuario != null)
+				return false;
+		} else if (!usuario.equals(other.usuario))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "DocumentoVagaEstagioMessage [message=" + message + ", date=" + date + ", status=" + status
+				+ ", usuario=" + usuario + ", documentoVagaEstagio=" + documentoVagaEstagio + "]";
+	}
+
 	
 }

@@ -18,18 +18,11 @@ import org.hibernate.annotations.FetchMode;
 
 import com.j7ss.core.DAO;
 import com.j7ss.core.DAOException;
-import com.j7ss.core.IGenericEntity;
 
 @Entity
 @Table(name = "campus")
-public class Campus implements IGenericEntity<Campus>{
+public class Campus extends BaseEntity<Integer>{
 
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
-	
 	private String nome;
 	
 	@Column(length=20)
@@ -60,14 +53,6 @@ public class Campus implements IGenericEntity<Campus>{
 	@Fetch(FetchMode.JOIN)
 	private List<Departamento> departamentos;
 	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -156,97 +141,36 @@ public class Campus implements IGenericEntity<Campus>{
 		this.departamentos = departamentos;
 	}
 
-	//******************************************************************************************************************************
-//## Builder
-	public Campus id(Integer id){
-		this.id = id;
-		return this;
-	}
-	
-	public Campus nome(String nome){
-		this.nome = nome;
-		return this;
-	}
-	
-	public Campus telefone(String telefone){
-		this.telefone = telefone;
-		return this;
-	}
-	
-	public Campus email(String email){
-		this.email = email;
-		return this;
-	}
-	
-	public Campus instituicao(Instituicao instituicao){
-		this.instituicao = instituicao;
-		return this;
-	}
-	
-	public Campus addDepartamento(Departamento departamento){
-		if(departamentos == null){
-			departamentos = new ArrayList<>();
-		}
-		departamentos.add(departamento);
-		return this;
-	}
-	
-	public Campus removeDepartamento(Departamento departamento){
-		if(departamentos != null){
-			departamentos.remove(departamento);
-		}
-		return this;
-	}
-	
-	public Campus endereco(String endereco){
-		this.endereco = endereco;
-		return this;
-	}
-	
-	public Campus bairro(String bairro){
-		this.bairro = bairro;
-		return this;
-	}
-	
-	public Campus cep(String cep){
-		this.cep = cep;
-		return this;
-	}
-	
-	public Campus cidade(String cidade){
-		this.cidade = cidade;
-		return this;
-	}
-	
-	public Campus uf(String uf){
-		this.uf = uf;
-		return this;
-	}
-	
-	
-//******************************************************************************************************************************
-//## Getters Setters
 	@Override
-	public boolean isNew() {
-		return id == null;
-	}
-	
-	
-//******************************************************************************************************************************
-//## DAO
-	private static DAO<Campus> dao = new DAO<Campus>(Campus.class);
-	
-	@Override
-	public Campus save() throws DAOException{
-		return isNew() ? dao.add(this) : dao.update(this);
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((instituicao == null) ? 0 : instituicao.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
 	}
 
 	@Override
-	public boolean remove() throws DAOException {
-		return dao.remove(this);
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Campus other = (Campus) obj;
+		if (instituicao == null) {
+			if (other.instituicao != null)
+				return false;
+		} else if (!instituicao.equals(other.instituicao))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		return true;
 	}
+	
 
-	public static List<Campus> findByNomeLike(Instituicao instituicao, String nome){
-		return dao.findByQuery("SELECT i FROM Campus i WHERE i.instituicao = ?1 AND lower(i.nome) like ?2" ,instituicao, "%"+nome.toLowerCase()+"%");
-	}
 }
