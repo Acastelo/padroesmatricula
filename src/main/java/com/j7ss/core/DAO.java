@@ -8,6 +8,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import com.j7ss.core.util.JPAUtil;
+
 public class DAO<T extends IGenericEntity<T>>{
 
 	private final Class<T> clazz;
@@ -17,7 +19,7 @@ public class DAO<T extends IGenericEntity<T>>{
 	}
 
 	public T add(T entity) throws DAOException {
-		EntityManager entityManager = createEntityManager();
+		EntityManager entityManager = JPAUtil.getInstancia();
 		entityManager.getTransaction().begin();
 		try {
 			entityManager.persist(entity);
@@ -32,7 +34,7 @@ public class DAO<T extends IGenericEntity<T>>{
 	}
 	
 	 public List<T> add(List<T> list) throws DAOException{
-		EntityManager entityManager = createEntityManager();
+		EntityManager entityManager = JPAUtil.getInstancia();
 		entityManager.getTransaction().begin();
 		try {
 			for (T t : list) {
@@ -51,7 +53,7 @@ public class DAO<T extends IGenericEntity<T>>{
 	 
 	@SuppressWarnings("unchecked")
 	public void add(T ...entitys) throws DAOException{
-		EntityManager entityManager = createEntityManager();
+		EntityManager entityManager = JPAUtil.getInstancia();
 		entityManager.getTransaction().begin();
 		try {
 			for (T iGenericEntity : entitys) {
@@ -67,7 +69,7 @@ public class DAO<T extends IGenericEntity<T>>{
 	 }
 	 
 	public boolean remove(Integer id) throws DAOException {
-		EntityManager entityManager = createEntityManager();
+		EntityManager entityManager = JPAUtil.getInstancia();
 		entityManager.getTransaction().begin();
 		try {
 			entityManager.remove(findOne(id));
@@ -82,7 +84,7 @@ public class DAO<T extends IGenericEntity<T>>{
 	}
 
 	public boolean remove(T entity) throws DAOException {
-		EntityManager entityManager = createEntityManager();
+		EntityManager entityManager = JPAUtil.getInstancia();
 		entityManager.getTransaction().begin();
 		try {
 			T entityToBeRemoved = entityManager.merge(entity);
@@ -98,7 +100,7 @@ public class DAO<T extends IGenericEntity<T>>{
 	}
 
 	public T update(T entity) throws DAOException {
-		EntityManager entityManager = createEntityManager();
+		EntityManager entityManager = JPAUtil.getInstancia();
 		entityManager.getTransaction().begin();
 		try {
 			entityManager.merge(entity);
@@ -119,7 +121,7 @@ public class DAO<T extends IGenericEntity<T>>{
 	
 	@SuppressWarnings({ "unchecked", "hiding" })
 	public <T> List<T> findByQuery(int maxResult, String select, Object... params) {
-		EntityManager entityManager = createEntityManager();
+		EntityManager entityManager = JPAUtil.getInstancia();
 		try {
 			return createQuery(entityManager, clazz, maxResult, select, params).getResultList();
 		}finally{
@@ -135,7 +137,7 @@ public class DAO<T extends IGenericEntity<T>>{
 	
 	@SuppressWarnings({ "unchecked", "hiding" })
 	public <T> List<T> findByNativeQuery(int maxResult, String select, Object... params) {
-		EntityManager entityManager = createEntityManager();
+		EntityManager entityManager = JPAUtil.getInstancia();
 		try {
 			return createNativeQuery(entityManager, clazz, maxResult, select, params).getResultList();
 		}finally{
@@ -145,7 +147,7 @@ public class DAO<T extends IGenericEntity<T>>{
 	
 	@SuppressWarnings("unchecked")
 	public T findOneByQuery(String select, Object... params) {
-		EntityManager entityManager = createEntityManager();
+		EntityManager entityManager = JPAUtil.getInstancia();
 		try {
 			return (T) createQuery(entityManager, clazz, 0, select, params).getSingleResult();
 		}finally{
@@ -154,7 +156,7 @@ public class DAO<T extends IGenericEntity<T>>{
 	}
 
 	public T findOne(Serializable pk) {
-		EntityManager entityManager = createEntityManager();
+		EntityManager entityManager = JPAUtil.getInstancia();
 		try {
 			return entityManager.find(clazz, pk);
 		}finally{
@@ -167,7 +169,7 @@ public class DAO<T extends IGenericEntity<T>>{
 	}
 	
 	public Long countAll(){
-		EntityManager entityManager = createEntityManager();
+		EntityManager entityManager = JPAUtil.getInstancia();
 		try{
 			return (Long) entityManager.createQuery("SELECT COUNT(*) FROM "+clazz.getSimpleName()).getSingleResult();
 		}finally{
@@ -197,41 +199,7 @@ public class DAO<T extends IGenericEntity<T>>{
 			query.setMaxResults(maxResult);
 		}
 		return query;
-	}
-	
-	public EntityManager createEntityManager() {
-		return GenericJPA.getInstance().getEntityManagerFactory().createEntityManager();
-	}
-	
-	static class GenericJPA implements Serializable{
-		private static final long serialVersionUID = -8732971614557917884L;
-
-		private static GenericJPA jpa;
-		private static EntityManagerFactory entityManagerFactory;
-
-		private GenericJPA() {
-			if (entityManagerFactory == null) {
-				entityManagerFactory = Persistence.createEntityManagerFactory("estagio_postgres"); 
-			}
-		}
-
-		public static GenericJPA getInstance() {
-			if (jpa == null) {
-				jpa = new GenericJPA();
-			}
-			return jpa;
-		}
-
-		public EntityManagerFactory getEntityManagerFactory() {
-			return entityManagerFactory;
-		}
-		
-		/*public static void main(String[] args) {
-	        EntityManagerFactory factory = Persistence
-	                .createEntityManagerFactory("estagio_postgres");
-	        factory.close();
-		}*/
-	}
+	}	
 	
 }
 

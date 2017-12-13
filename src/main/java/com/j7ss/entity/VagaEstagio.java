@@ -20,8 +20,8 @@ import org.hibernate.annotations.FetchMode;
 
 import com.j7ss.core.DAO;
 import com.j7ss.core.DAOException;
-import com.j7ss.core.DateUtil;
 import com.j7ss.core.IGenericEntity;
+import com.j7ss.core.util.DateUtil;
 import com.j7ss.entity.constraint.VagaEstagioAtividadeDiariaStatus;
 import com.j7ss.entity.constraint.VagaEstagioStatus;
 import com.j7ss.entity.constraint.VagaEstagioTurno;

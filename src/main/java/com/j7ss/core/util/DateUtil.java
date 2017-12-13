@@ -1,4 +1,4 @@
-package com.j7ss.core;
+package com.j7ss.core.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

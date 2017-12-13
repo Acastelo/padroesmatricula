@@ -20,8 +20,8 @@ import org.hibernate.annotations.FetchMode;
 
 import com.j7ss.core.DAO;
 import com.j7ss.core.DAOException;
-import com.j7ss.core.DateUtil;
 import com.j7ss.core.IGenericEntity;
+import com.j7ss.core.util.DateUtil;
 import com.j7ss.entity.constraint.AlunoStatus;
 
 @Entity
@@ -29,9 +29,6 @@ import com.j7ss.entity.constraint.AlunoStatus;
 public class Aluno implements IGenericEntity<Aluno>{
 
 	private static final long serialVersionUID = 1L;
-	
-	public Aluno() {
-	}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
