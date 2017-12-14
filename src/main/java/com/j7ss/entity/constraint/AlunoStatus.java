@@ -8,10 +8,10 @@ public enum AlunoStatus {
 	// Após concluir todo o wizard de cadastro, seu status passa a ser 'VERIFICAR'
 	VERIFICAR("label-warning", "Verificar"),	
 	
-	// Um funcionário do IFCE, deve verificar se os dados deste aluno está correto, caso ok, seu status será 'VALIDO'
+	// Um funcionário, deve verificar se os dados deste aluno está correto, caso ok, seu status será 'VALIDO'
 	VALIDO("label-success", "Válido"), 			
 	
-	// Se durante a validação do cadastro do aluno, o funcionário do IFCE detectar algum erro, seu status será 'INVALIDO'
+	// Se durante a validação do cadastro do aluno, o funcionário detectar algum erro, seu status será 'INVALIDO'
 	INVALIDO("label-danger", "Inválido");		
 	
 	private String color; 

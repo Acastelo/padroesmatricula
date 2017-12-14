@@ -23,7 +23,8 @@ public class CursoConverter implements Converter, Serializable {
 	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		return alunoCadastroBean.getCursoByNome(value);
+		//return alunoCadastroBean.getCursoByNome(value);
+		return null;
 	}
 
 	@Override

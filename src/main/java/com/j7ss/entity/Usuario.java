@@ -1,7 +1,12 @@
 package com.j7ss.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -9,8 +14,14 @@ import com.j7ss.entity.constraint.UsuarioType;
 
 @Entity
 @Table(name = "usuario")
-public class Usuario extends BaseEntity<Integer>{
+public class Usuario implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
+	
 	private String nome;
 	
 	@Column(unique=true, length=80)
@@ -104,12 +115,24 @@ public class Usuario extends BaseEntity<Integer>{
 		return aluno;
 	}
 
+	public void getSenha(String md5) {
+		getSenha();
+		
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((aluno == null) ? 0 : aluno.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
@@ -118,20 +141,15 @@ public class Usuario extends BaseEntity<Integer>{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
+		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		if (aluno == null) {
-			if (other.aluno != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!aluno.equals(other.aluno))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
+		} else if (!id.equals(other.id))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
@@ -143,14 +161,11 @@ public class Usuario extends BaseEntity<Integer>{
 
 	@Override
 	public String toString() {
-		return "Usuario [nome=" + nome + ", email=" + email + ", senha=" + senha + ", tipoUsuario=" + tipoUsuario
-				+ ", emailValido=" + emailValido + ", ativo=" + ativo + ", instituicaoFilter=" + instituicaoFilter
-				+ ", instituicao=" + instituicao + ", aluno=" + aluno + "]";
+		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", tipoUsuario="
+				+ tipoUsuario + ", emailValido=" + emailValido + ", ativo=" + ativo + ", instituicaoFilter="
+				+ instituicaoFilter + ", instituicao=" + instituicao + ", aluno=" + aluno + "]";
 	}
-
-	public void getSenha(String md5) {
-		getSenha();
-		
-	}
+	
+	
 	
 }

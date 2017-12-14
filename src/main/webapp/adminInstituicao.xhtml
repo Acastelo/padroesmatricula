@@ -1,11 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-	@version     1.0.0
-	@author      Edivando J. Alves
-	@contact     edivando@j7ss.com ( http://www.j7ss.com )
-	
-	@copyright Copyright 2010 - 2016 J7 Smart Solutions, all rights reserved. 
--->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -13,7 +6,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/layout/layoutPrivateBasic.xhtml">
-	<ui:define name="title">IFCE Estágios - Instituições</ui:define>
+	<ui:define name="title">UECE Estagios - Instituições</ui:define>
 	
 	<ui:param name="id" value="instituicao" />
 	<ui:param name="view" value="#{adminInstituicaoBean}" />
@@ -72,7 +65,7 @@
 		
 		<p:separator />
 		
-		<p:outputPanel rendered="#{!adminInstituicaoBean.entity.isNew()}">
+		<!-- <p:outputPanel rendered="#{!adminInstituicaoBean.entity.isNew()}"> -->
 		
 			<div class="row">
 				<div class="col-md-3">

@@ -23,7 +23,8 @@ public class DepartamentoConverter implements Converter, Serializable {
 	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		return alunoCadastroBean.getDepartamentoByNome(value);
+		//return alunoCadastroBean.getDepartamentoByNome(value);
+		return null;
 	}
 
 	@Override

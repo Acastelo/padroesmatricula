@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+ <ui:composition template="/layout/layoutPublicDefault.xhtml">
+ 	<ui:define name="title">Cadastro de Aluno</ui:define>
+		<ui:define name="menu">	
+		<div class="horizontal-menu navbar-collapse collapse ">
+        	<ul class="nav navbar-nav">
+            	<li><a href="cadastro.html">Cadastro Aluno</a></li>
+            	<li class="active"><a href="cadastroProf.html">Cadastro Professor</a></li>
+           	</ul>
+    	</div>
+	</ui:define>
+ 	<ui:define name="container">
+ 	<br/><br/>
+		<div class="row">
+	 		<div class="col-sm-4"></div>
+	       	<div class="col-sm-4">
+	            <section class="panel">
+	                <header class="panel-heading">
+	                    Novo Professor
+	                </header>
+	                <div class="panel-body">
+	                	<h:form>
+	                		<div class="form-horizontal">
+	                			<div class="form-group">
+								    <label for="nome" class="col-sm-3 control-label"><strong>Nome:</strong></label>
+								    <div class="col-sm-8">
+								    	<p:inputText value="#{professorCadastroBean.professor.nome}" placeholder="Professor informe seu nome completo..." styleClass="form-control"
+								    		maxlength="80" required="true" requiredMessage="Você deve informar o seu nome completo!"
+								    		id="nome"/>	
+								    	<p:message for="nome" display="icon"/>  		    
+								    </div>
+								    <div class="col-sm-1">
+										<p:message for="nome" display="icon"/>
+									</div>
+						    	</div>
+	                		</div>
+              				 
+	                		<div class="form-horizontal">
+	                			<div class="form-group">
+								    <label for="qualificacao" class="col-sm-3 control-label"><strong>Titulação:</strong></label>
+								    <div class="col-sm-8">
+								    	<p:inputText value="#{professorCadastroBean.professor.qualificação}" placeholder="Informe seu titulo" styleClass="form-control"
+								    		maxlength="80" required="true" requiredMessage="Você deve informar sua matrícula!" id="qualificacao"/>	
+								    	<p:message for="qualificacao" display="icon"/>  		    
+								    </div>
+								    <div class="col-sm-1">
+										<p:message for="qualificacao" display="icon"/>
+									</div>
+						    	</div>
+	                		</div>
+	                	
+	                		<div class="form-horizontal">
+	                			<div class="form-group">
+								    <label for="email" class="col-sm-3 control-label"><strong>Email:</strong></label>
+								    <div class="col-sm-8">
+								    	<p:inputText value="#{professorCadastroBean.professor.email}" placeholder="Email..." styleClass="form-control"
+								    		maxlength="80" required="true" requiredMessage="Você deve informar o email!"
+								    		id="email" />	
+								    	<p:message for="email" display="icon"/>		    
+								    </div>
+								    <div class="col-sm-1">
+										<p:message for="email" display="icon"/>
+									</div>
+						    	</div>
+	                		</div>
+	                		<div class="form-horizontal">
+	                			<div class="form-group">
+								    <label for="idade" class="col-sm-3 control-label"><strong>Idade:</strong></label>
+								    <div class="col-sm-8">
+								    	<p:inputText value="#{professorCadastroBean.professor.idade}" placeholder="Idade" styleClass="form-control"
+								    		maxlength="20" required="true" requiredMessage="Você deve informar o sua senha!"
+								    		id="idade"/>
+								    	<p:message for="idade" display="icon"/>				    
+								    </div>
+								    <div class="col-sm-1">
+										<p:message for="idade" display="icon"/>
+									</div>
+						    	</div>
+	                		</div>
+	                		<hr/>
+	                		<div class="col-md-1"/>
+	                		<div class="col-md-10">
+	                			<div class="text-center">
+									<p:commandLink action="#{professorCadastroBean.save}" styleClass="btn btn-info btn-block">
+										<strong>Finalizar Cadastro</strong>
+									</p:commandLink>
+								</div>
+	                		</div>
+							<div class="col-md-1"/>
+						</h:form>
+	                </div>
+	            </section>
+	        </div>
+	        <div class="col-sm-4"></div>
+	    </div>
+	</ui:define>
+ </ui:composition>
+</html>
