@@ -9,7 +9,7 @@
 	<repositories>
 		<repository>
 			<id>eap</id>
-			<url>http://maven.repository.redhat.com/techpreview/all</url>
+			<url>https://maven.repository.redhat.com/techpreview/all</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -20,14 +20,14 @@
 		<repository>
 			<id>prime-repo</id>
 			<name>PrimeFaces Maven Repository</name>
-			<url>http://repository.primefaces.org</url>
+			<url>https://repository.primefaces.org</url>
 			<layout>default</layout>
 		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
 			<id>eap</id>
-			<url>http://maven.repository.redhat.com/techpreview/all</url>
+			<url>https://maven.repository.redhat.com/techpreview/all</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
